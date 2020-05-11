@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="coolrunner" translate="label" sortOrder="100">
+            <label>CoolRunner</label>
+        </tab>
+        <section id="cr_settings" translate="label" sortOrder="130" showInDefault="0" showInWebsite="0" showInStore="1">
+            <class>separator-top</class>
+            <label>Generelle indstillinger</label>
+            <tab>coolrunner</tab>
+            <resource>CoolRunner_Shipping::coolrunner_config</resource>
+            <group id="activation" translate="label" type="text" sortOrder="10" showInDefault="0" showInWebsite="0" showInStore="1">
+                <label>CoolRunner</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="0" showInStore="1">
+                    <label>Aktiver CoolRunner</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="credentials" translate="label" type="text" sortOrder="10" showInDefault="0" showInWebsite="0" showInStore="1">
+                <label>Webservice</label>
+                <field id="cr_username" translate="label" type="text" sortOrder="1" showInDefault="0" showInWebsite="0" showInStore="1">
+                    <label>Brugernavn</label>
+                    <comment>Indtast dit brugernavn fra CoolRunner.dk > Integration > Webservice</comment>
+                </field>
+                <field id="cr_token" translate="label" type="text" sortOrder="1" showInDefault="0" showInWebsite="0" showInStore="1">
+                    <label>Token</label>
+                    <comment>Indtast dit token fra CoolRunner.dk > Integration > Webservice</comment>
+                </field>
+            </group>
+            <group id="agreement" translate="label" type="text" sortOrder="10" showInDefault="0" showInWebsite="0" showInStore="1">
+                <label>Aftaleindstillinger</label>
+                <field id="cr_type" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="0" showInStore="1">
+                    <label>Lagerhåndtering</label>
+                    <comment>Vælge din lageropsætning (Eget lager eller PCN)</comment>
+                    <source_model>CoolRunner\Shipping\Model\Config\Source\AgreementTypes</source_model>
+                </field>
+            </group>
+        </section>
+
+        <section id="cr_shippingsettings" translate="label" sortOrder="130" showInDefault="0" showInWebsite="0" showInStore="1">
+            <class>separator-top</class>
+            <label>Leveringsindstillinger</label>
+            <tab>coolrunner</tab>
+            <resource>CoolRunner_Shipping::coolrunner_config</resource>
+            <group id="testgroup" translate="label" type="text" sortOrder="10" showInDefault="0" showInWebsite="0" showInStore="1">
+                <label>Leveringsindstillinger</label>
+                <field id="testfield" translate="label" type="text" sortOrder="1" showInDefault="0" showInWebsite="0" showInStore="1">
+                    <label>Tekstfelt</label>
+                    <comment>Her kan der indtastet en tekst</comment>
+                </field>
+            </group>
+        </section>
+
+    </system>
+</config>
