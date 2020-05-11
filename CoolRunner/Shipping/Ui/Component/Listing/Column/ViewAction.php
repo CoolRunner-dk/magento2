@@ -40,7 +40,7 @@ class ViewAction extends Column
                         ],
                         'create_label' => [
                             'href' => $this->urlBuilder->getUrl(
-                                'coolrunner/index/createLabelAction',
+                                'coolrunner/order/createLabels',
                                 [
                                     $urlEntityParamName => $item['entity_id']
                                 ]
@@ -49,7 +49,7 @@ class ViewAction extends Column
                         ],
                         'print_label' => [
                             'href' => $this->urlBuilder->getUrl(
-                                'coolrunner/index/printLabelAction',
+                                'coolrunner/order/printLabels',
                                 [
                                     $urlEntityParamName => $item['entity_id']
                                 ]

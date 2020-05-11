@@ -4,32 +4,32 @@
         <tab id="coolrunner" translate="label" sortOrder="100">
             <label>CoolRunner</label>
         </tab>
-        <section id="cr_settings" translate="label" sortOrder="130" showInDefault="0" showInWebsite="0" showInStore="1">
+        <section id="cr_settings" translate="label" sortOrder="130" showInDefault="0" showInWebsite="1" showInStore="1">
             <class>separator-top</class>
             <label>Generelle indstillinger</label>
             <tab>coolrunner</tab>
             <resource>CoolRunner_Shipping::coolrunner_config</resource>
-            <group id="activation" translate="label" type="text" sortOrder="10" showInDefault="0" showInWebsite="0" showInStore="1">
+            <group id="activation" translate="label" type="text" sortOrder="10" showInDefault="0" showInWebsite="1" showInStore="1">
                 <label>CoolRunner</label>
-                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="0" showInStore="1">
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
                     <label>Aktiver CoolRunner</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
             </group>
-            <group id="credentials" translate="label" type="text" sortOrder="10" showInDefault="0" showInWebsite="0" showInStore="1">
+            <group id="credentials" translate="label" type="text" sortOrder="10" showInDefault="0" showInWebsite="1" showInStore="1">
                 <label>Webservice</label>
-                <field id="cr_username" translate="label" type="text" sortOrder="1" showInDefault="0" showInWebsite="0" showInStore="1">
+                <field id="cr_username" translate="label" type="text" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
                     <label>Brugernavn</label>
                     <comment>Indtast dit brugernavn fra CoolRunner.dk > Integration > Webservice</comment>
                 </field>
-                <field id="cr_token" translate="label" type="text" sortOrder="1" showInDefault="0" showInWebsite="0" showInStore="1">
+                <field id="cr_token" translate="label" type="text" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
                     <label>Token</label>
                     <comment>Indtast dit token fra CoolRunner.dk > Integration > Webservice</comment>
                 </field>
             </group>
-            <group id="agreement" translate="label" type="text" sortOrder="10" showInDefault="0" showInWebsite="0" showInStore="1">
+            <group id="agreement" translate="label" type="text" sortOrder="10" showInDefault="0" showInWebsite="1" showInStore="1">
                 <label>Aftaleindstillinger</label>
-                <field id="cr_type" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="0" showInStore="1">
+                <field id="cr_type" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
                     <label>Lagerhåndtering</label>
                     <comment>Vælge din lageropsætning (Eget lager eller PCN)</comment>
                     <source_model>CoolRunner\Shipping\Model\Config\Source\AgreementTypes</source_model>
@@ -37,19 +37,42 @@
             </group>
         </section>
 
-        <section id="cr_shippingsettings" translate="label" sortOrder="130" showInDefault="0" showInWebsite="0" showInStore="1">
-            <class>separator-top</class>
-            <label>Leveringsindstillinger</label>
-            <tab>coolrunner</tab>
-            <resource>CoolRunner_Shipping::coolrunner_config</resource>
-            <group id="testgroup" translate="label" type="text" sortOrder="10" showInDefault="0" showInWebsite="0" showInStore="1">
-                <label>Leveringsindstillinger</label>
-                <field id="testfield" translate="label" type="text" sortOrder="1" showInDefault="0" showInWebsite="0" showInStore="1">
-                    <label>Tekstfelt</label>
-                    <comment>Her kan der indtastet en tekst</comment>
+        <section id="carriers" translate="label" type="text" sortOrder="320" showInDefault="0" showInStore="1" showInWebsite="1">
+            <group id="customshipping" translate="label" type="text" sortOrder="900" showInDefault="0" showInWebsite="0" showInStore="1">
+                <label>CoolRunner Test shipping</label>
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="0" showInStore="0" showInWebsite="1" canRestore="1">
+                    <label>Aktiv</label>
+                    <source_model>Magento\Config\Model\Source\Yesno</source_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Title</label>
+                </field>
+                <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Method Name</label>
+                </field>
+                <field id="shipping_cost" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0" >
+                    <label>Shipping Cost</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                </field>
+                <field id="sallowspecific" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Ship to Applicable Countries</label>
+                    <frontend_class>shipping-applicable-country</frontend_class>
+                    <source_model>Magento\Shipping\Model\Config\Source\Allspecificcountries</source_model>
+                </field>
+                <field id="specificcountry" translate="label" type="multiselect" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Ship to Specific Countries</label>
+                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+                <field id="showmethod" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Show Method if Not Applicable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <frontend_class>shipping-skip-hide</frontend_class>
+                </field>
+                <field id="sort_order" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Sort Order</label>
                 </field>
             </group>
         </section>
-
     </system>
 </config>

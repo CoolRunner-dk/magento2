@@ -6,5 +6,16 @@
                 <enable>0</enable>
             </activation>
         </cr_settings>
+        <carriers>
+            <customshipping>
+                <active>0</active>
+                <title>CoolRunner Test Shipping</title>
+                <name>CoolRunner Test Shipping Name</name>
+                <shipping_cost>10</shipping_cost>
+                <sallowspecific>0</sallowspecific>
+                <sort_order>15</sort_order>
+                <model>CoolRunner\Shipping\Model\Carrier\Testshipping</model>
+            </customshipping>
+        </carriers>
     </default>
 </config>
