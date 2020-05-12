@@ -1,0 +1,245 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="coolrunner" translate="label" sortOrder="100">
+            <label>CoolRunner</label>
+        </tab>
+        <section id="cr_settings" translate="label" sortOrder="130" showInDefault="0" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Generelle indstillinger</label>
+            <tab>coolrunner</tab>
+            <resource>CoolRunner_Shipping::coolrunner_config</resource>
+            <group id="activation" translate="label" type="text" sortOrder="10" showInDefault="0" showInWebsite="1" showInStore="1">
+                <label>CoolRunner</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Aktiver CoolRunner</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="credentials" translate="label" type="text" sortOrder="10" showInDefault="0" showInWebsite="1" showInStore="1">
+                <label>Webservice</label>
+                <field id="cr_username" translate="label" type="text" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Brugernavn</label>
+                    <comment>Indtast dit brugernavn fra CoolRunner.dk > Integration > Webservice</comment>
+                </field>
+                <field id="cr_token" translate="label" type="text" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Token</label>
+                    <comment>Indtast dit token fra CoolRunner.dk > Integration > Webservice</comment>
+                </field>
+            </group>
+            <group id="agreement" translate="label" type="text" sortOrder="10" showInDefault="0" showInWebsite="1" showInStore="1">
+                <label>Aftaleindstillinger</label>
+                <field id="cr_type" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Lagerhåndtering</label>
+                    <comment>Vælge din lageropsætning (Eget lager eller PCN)</comment>
+                    <source_model>CoolRunner\Shipping\Model\Config\Source\AgreementTypes</source_model>
+                </field>
+                <field id="cr_printformat" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Printformat</label>
+                    <comment>Vælge størrelsen på dit printformat.</comment>
+                    <source_model>CoolRunner\Shipping\Model\Config\Source\PrintTypes</source_model>
+                </field>
+            </group>
+        </section>
+
+        <section id="cr_homerunner" translate="label" type="text" sortOrder="305" showInDefault="0" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>HomeRunner</label>
+            <tab>coolrunner</tab>
+            <resource>CoolRunner_Shipping::coolrunner_config</resource>
+            <group id="activation" translate="label" type="text" sortOrder="10" showInDefault="0" showInWebsite="1" showInStore="1">
+                <label>HomeRunner indstillinger</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Aktiver</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Vælge om leverandøren skal være aktiv</comment>
+                </field>
+                <field id="carrierimage" translate="label" type="text" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Logo URL</label>
+                    <comment>Indtast en URL for ønsket logo der skal fremvises i checkout</comment>
+                </field>
+                <field id="methods" translate="label" sortOrder="5" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Metoder</label>
+                    <frontend_model>CoolRunner\Shipping\Block\Adminhtml\Form\Field\Methods</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <comment>Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet "Priser".</comment>
+                </field>
+            </group>
+        </section>
+
+        <section id="cr_dhl" translate="label" type="text" sortOrder="303" showInDefault="0" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>DHL</label>
+            <tab>coolrunner</tab>
+            <resource>CoolRunner_Shipping::coolrunner_config</resource>
+            <group id="activation" translate="label" type="text" sortOrder="10" showInDefault="0" showInWebsite="1" showInStore="1">
+                <label>DHL indstillinger</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Aktiver DHL</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Vælge om leverandøren skal være aktiv</comment>
+                </field>
+                <field id="carrierimage" translate="label" type="text" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Logo URL</label>
+                    <comment>Indtast en URL for ønsket logo der skal fremvises i checkout</comment>
+                </field>
+                <field id="methods" translate="label" sortOrder="5" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Metoder</label>
+                    <frontend_model>CoolRunner\Shipping\Block\Adminhtml\Form\Field\Methods</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <comment>Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet "Priser".</comment>
+                </field>
+            </group>
+        </section>
+
+        <section id="cr_gls" translate="label" type="text" sortOrder="304" showInDefault="0" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>GLS</label>
+            <tab>coolrunner</tab>
+            <resource>CoolRunner_Shipping::coolrunner_config</resource>
+            <group id="activation" translate="label" type="text" sortOrder="10" showInDefault="0" showInWebsite="1" showInStore="1">
+                <label>GLS indstillinger</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Aktiver GLS</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Vælge om leverandøren skal være aktiv</comment>
+                </field>
+                <field id="carrierimage" translate="label" type="text" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Logo URL</label>
+                    <comment>Indtast en URL for ønsket logo der skal fremvises i checkout</comment>
+                </field>
+                <field id="methods" translate="label" sortOrder="5" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Metoder</label>
+                    <frontend_model>CoolRunner\Shipping\Block\Adminhtml\Form\Field\Methods</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <comment>Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet "Priser".</comment>
+                </field>
+            </group>
+        </section>
+
+        <section id="cr_postnord" translate="label" type="text" sortOrder="307" showInDefault="0" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>PostNord</label>
+            <tab>coolrunner</tab>
+            <resource>CoolRunner_Shipping::coolrunner_config</resource>
+            <group id="activation" translate="label" type="text" sortOrder="10" showInDefault="0" showInWebsite="1" showInStore="1">
+                <label>PostNord indstillinger</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Aktiver PostNord</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Vælge om leverandøren skal være aktiv</comment>
+                </field>
+                <field id="carrierimage" translate="label" type="text" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Logo URL</label>
+                    <comment>Indtast en URL for ønsket logo der skal fremvises i checkout</comment>
+                </field>
+                <field id="methods" translate="label" sortOrder="5" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Metoder</label>
+                    <frontend_model>CoolRunner\Shipping\Block\Adminhtml\Form\Field\Methods</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <comment>Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet "Priser".</comment>
+                </field>
+            </group>
+        </section>
+
+        <section id="cr_dao" translate="label" type="text" sortOrder="302" showInDefault="0" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>DAO</label>
+            <tab>coolrunner</tab>
+            <resource>CoolRunner_Shipping::coolrunner_config</resource>
+            <group id="activation" translate="label" type="text" sortOrder="10" showInDefault="0" showInWebsite="1" showInStore="1">
+                <label>DAO indstillinger</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Aktiver DAO</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Vælge om leverandøren skal være aktiv</comment>
+                </field>
+                <field id="carrierimage" translate="label" type="text" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Logo URL</label>
+                    <comment>Indtast en URL for ønsket logo der skal fremvises i checkout</comment>
+                </field>
+                <field id="methods" translate="label" sortOrder="5" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Metoder</label>
+                    <frontend_model>CoolRunner\Shipping\Block\Adminhtml\Form\Field\Methods</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <comment>Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet "Priser".</comment>
+                </field>
+            </group>
+        </section>
+
+        <section id="cr_bring" translate="label" type="text" sortOrder="300" showInDefault="0" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Bring</label>
+            <tab>coolrunner</tab>
+            <resource>CoolRunner_Shipping::coolrunner_config</resource>
+            <group id="activation" translate="label" type="text" sortOrder="10" showInDefault="0" showInWebsite="1" showInStore="1">
+                <label>Bring indstillinger</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Aktiver Bring</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Vælge om leverandøren skal være aktiv</comment>
+                </field>
+                <field id="carrierimage" translate="label" type="text" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Logo URL</label>
+                    <comment>Indtast en URL for ønsket logo der skal fremvises i checkout</comment>
+                </field>
+                <field id="methods" translate="label" sortOrder="5" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Metoder</label>
+                    <frontend_model>CoolRunner\Shipping\Block\Adminhtml\Form\Field\Methods</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <comment>Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet "Priser".</comment>
+                </field>
+            </group>
+        </section>
+
+        <section id="cr_posti" translate="label" type="text" sortOrder="306" showInDefault="0" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Posti</label>
+            <tab>coolrunner</tab>
+            <resource>CoolRunner_Shipping::coolrunner_config</resource>
+            <group id="activation" translate="label" type="text" sortOrder="10" showInDefault="0" showInWebsite="1" showInStore="1">
+                <label>Posti indstillinger</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Aktiver Posti</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Vælge om leverandøren skal være aktiv</comment>
+                </field>
+                <field id="carrierimage" translate="label" type="text" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Logo URL</label>
+                    <comment>Indtast en URL for ønsket logo der skal fremvises i checkout</comment>
+                </field>
+                <field id="methods" translate="label" sortOrder="5" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Metoder</label>
+                    <frontend_model>CoolRunner\Shipping\Block\Adminhtml\Form\Field\Methods</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <comment>Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet "Priser".</comment>
+                </field>
+            </group>
+        </section>
+
+        <section id="cr_cooleurope" translate="label" type="text" sortOrder="301" showInDefault="0" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>CoolEurope</label>
+            <tab>coolrunner</tab>
+            <resource>CoolRunner_Shipping::coolrunner_config</resource>
+            <group id="activation" translate="label" type="text" sortOrder="10" showInDefault="0" showInWebsite="1" showInStore="1">
+                <label>CoolEurope indstillinger</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Aktiver CoolEurope</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Vælge om leverandøren skal være aktiv</comment>
+                </field>
+                <field id="carrierimage" translate="label" type="text" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Logo URL</label>
+                    <comment>Indtast en URL for ønsket logo der skal fremvises i checkout</comment>
+                </field>
+                <field id="methods" translate="label" sortOrder="5" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Metoder</label>
+                    <frontend_model>CoolRunner\Shipping\Block\Adminhtml\Form\Field\Methods</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <comment>Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet "Priser".</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
