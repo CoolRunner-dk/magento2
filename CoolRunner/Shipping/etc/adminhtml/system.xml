@@ -14,6 +14,7 @@
                 <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
                     <label>Aktiver CoolRunner</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Efter opsætning af CoolRunner indstillingerne kan du tilgå Salg > Forsendelsesmetoder og opsætte de forskellige metoder her.</comment>
                 </field>
             </group>
             <group id="credentials" translate="label" type="text" sortOrder="10" showInDefault="0" showInWebsite="1" showInStore="1">
@@ -42,14 +43,10 @@
             </group>
         </section>
 
-        <section id="cr_homerunner" translate="label" type="text" sortOrder="305" showInDefault="0" showInWebsite="1" showInStore="1">
-            <class>separator-top</class>
-            <label>HomeRunner</label>
-            <tab>coolrunner</tab>
-            <resource>CoolRunner_Shipping::coolrunner_config</resource>
-            <group id="activation" translate="label" type="text" sortOrder="10" showInDefault="0" showInWebsite="1" showInStore="1">
-                <label>HomeRunner indstillinger</label>
-                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
+        <section id="carriers" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="cr_homerunner" translate="label" type="text" sortOrder="2" showInDefault="0" showInWebsite="1" showInStore="1">
+                <label>CoolRunner: HomeRunner</label>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
                     <label>Aktiver</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Vælge om leverandøren skal være aktiv</comment>
@@ -64,18 +61,18 @@
                     <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
                     <comment>Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet "Priser".</comment>
                 </field>
+                <field id="pricerules" translate="label" sortOrder="5" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Prisregler</label>
+                    <frontend_model>CoolRunner\Shipping\Block\Adminhtml\Form\Field\PriceRules</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <comment>Opsæt forskellige prisregler ud fra vægt, pris, postnummer mm.</comment>
+                </field>
             </group>
-        </section>
 
-        <section id="cr_dhl" translate="label" type="text" sortOrder="303" showInDefault="0" showInWebsite="1" showInStore="1">
-            <class>separator-top</class>
-            <label>DHL</label>
-            <tab>coolrunner</tab>
-            <resource>CoolRunner_Shipping::coolrunner_config</resource>
-            <group id="activation" translate="label" type="text" sortOrder="10" showInDefault="0" showInWebsite="1" showInStore="1">
-                <label>DHL indstillinger</label>
-                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
-                    <label>Aktiver DHL</label>
+            <group id="cr_gls" translate="label" type="text" sortOrder="2" showInDefault="0" showInWebsite="1" showInStore="1">
+                <label>CoolRunner: GLS</label>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Aktiver</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Vælge om leverandøren skal være aktiv</comment>
                 </field>
@@ -89,18 +86,18 @@
                     <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
                     <comment>Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet "Priser".</comment>
                 </field>
+                <field id="pricerules" translate="label" sortOrder="5" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Prisregler</label>
+                    <frontend_model>CoolRunner\Shipping\Block\Adminhtml\Form\Field\PriceRules</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <comment>Opsæt forskellige prisregler ud fra vægt, pris, postnummer mm.</comment>
+                </field>
             </group>
-        </section>
 
-        <section id="cr_gls" translate="label" type="text" sortOrder="304" showInDefault="0" showInWebsite="1" showInStore="1">
-            <class>separator-top</class>
-            <label>GLS</label>
-            <tab>coolrunner</tab>
-            <resource>CoolRunner_Shipping::coolrunner_config</resource>
-            <group id="activation" translate="label" type="text" sortOrder="10" showInDefault="0" showInWebsite="1" showInStore="1">
-                <label>GLS indstillinger</label>
-                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
-                    <label>Aktiver GLS</label>
+            <group id="cr_dhl" translate="label" type="text" sortOrder="2" showInDefault="0" showInWebsite="1" showInStore="1">
+                <label>CoolRunner: DHL</label>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Aktiver</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Vælge om leverandøren skal være aktiv</comment>
                 </field>
@@ -114,18 +111,18 @@
                     <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
                     <comment>Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet "Priser".</comment>
                 </field>
+                <field id="pricerules" translate="label" sortOrder="5" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Prisregler</label>
+                    <frontend_model>CoolRunner\Shipping\Block\Adminhtml\Form\Field\PriceRules</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <comment>Opsæt forskellige prisregler ud fra vægt, pris, postnummer mm.</comment>
+                </field>
             </group>
-        </section>
 
-        <section id="cr_postnord" translate="label" type="text" sortOrder="307" showInDefault="0" showInWebsite="1" showInStore="1">
-            <class>separator-top</class>
-            <label>PostNord</label>
-            <tab>coolrunner</tab>
-            <resource>CoolRunner_Shipping::coolrunner_config</resource>
-            <group id="activation" translate="label" type="text" sortOrder="10" showInDefault="0" showInWebsite="1" showInStore="1">
-                <label>PostNord indstillinger</label>
-                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
-                    <label>Aktiver PostNord</label>
+            <group id="cr_bring" translate="label" type="text" sortOrder="2" showInDefault="0" showInWebsite="1" showInStore="1">
+                <label>CoolRunner: Bring</label>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Aktiver</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Vælge om leverandøren skal være aktiv</comment>
                 </field>
@@ -139,18 +136,18 @@
                     <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
                     <comment>Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet "Priser".</comment>
                 </field>
+                <field id="pricerules" translate="label" sortOrder="5" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Prisregler</label>
+                    <frontend_model>CoolRunner\Shipping\Block\Adminhtml\Form\Field\PriceRules</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <comment>Opsæt forskellige prisregler ud fra vægt, pris, postnummer mm.</comment>
+                </field>
             </group>
-        </section>
 
-        <section id="cr_dao" translate="label" type="text" sortOrder="302" showInDefault="0" showInWebsite="1" showInStore="1">
-            <class>separator-top</class>
-            <label>DAO</label>
-            <tab>coolrunner</tab>
-            <resource>CoolRunner_Shipping::coolrunner_config</resource>
-            <group id="activation" translate="label" type="text" sortOrder="10" showInDefault="0" showInWebsite="1" showInStore="1">
-                <label>DAO indstillinger</label>
-                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
-                    <label>Aktiver DAO</label>
+            <group id="cr_coolrunner" translate="label" type="text" sortOrder="2" showInDefault="0" showInWebsite="1" showInStore="1">
+                <label>CoolRunner: CoolEurope</label>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Aktiver</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Vælge om leverandøren skal være aktiv</comment>
                 </field>
@@ -164,18 +161,18 @@
                     <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
                     <comment>Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet "Priser".</comment>
                 </field>
+                <field id="pricerules" translate="label" sortOrder="5" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Prisregler</label>
+                    <frontend_model>CoolRunner\Shipping\Block\Adminhtml\Form\Field\PriceRules</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <comment>Opsæt forskellige prisregler ud fra vægt, pris, postnummer mm.</comment>
+                </field>
             </group>
-        </section>
 
-        <section id="cr_bring" translate="label" type="text" sortOrder="300" showInDefault="0" showInWebsite="1" showInStore="1">
-            <class>separator-top</class>
-            <label>Bring</label>
-            <tab>coolrunner</tab>
-            <resource>CoolRunner_Shipping::coolrunner_config</resource>
-            <group id="activation" translate="label" type="text" sortOrder="10" showInDefault="0" showInWebsite="1" showInStore="1">
-                <label>Bring indstillinger</label>
-                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
-                    <label>Aktiver Bring</label>
+            <group id="cr_dao" translate="label" type="text" sortOrder="2" showInDefault="0" showInWebsite="1" showInStore="1">
+                <label>CoolRunner: DAO</label>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Aktiver</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Vælge om leverandøren skal være aktiv</comment>
                 </field>
@@ -189,18 +186,18 @@
                     <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
                     <comment>Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet "Priser".</comment>
                 </field>
+                <field id="pricerules" translate="label" sortOrder="5" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Prisregler</label>
+                    <frontend_model>CoolRunner\Shipping\Block\Adminhtml\Form\Field\PriceRules</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <comment>Opsæt forskellige prisregler ud fra vægt, pris, postnummer mm.</comment>
+                </field>
             </group>
-        </section>
 
-        <section id="cr_posti" translate="label" type="text" sortOrder="306" showInDefault="0" showInWebsite="1" showInStore="1">
-            <class>separator-top</class>
-            <label>Posti</label>
-            <tab>coolrunner</tab>
-            <resource>CoolRunner_Shipping::coolrunner_config</resource>
-            <group id="activation" translate="label" type="text" sortOrder="10" showInDefault="0" showInWebsite="1" showInStore="1">
-                <label>Posti indstillinger</label>
-                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
-                    <label>Aktiver Posti</label>
+            <group id="cr_posti" translate="label" type="text" sortOrder="2" showInDefault="0" showInWebsite="1" showInStore="1">
+                <label>CoolRunner: Posti</label>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Aktiver</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Vælge om leverandøren skal være aktiv</comment>
                 </field>
@@ -214,18 +211,18 @@
                     <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
                     <comment>Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet "Priser".</comment>
                 </field>
+                <field id="pricerules" translate="label" sortOrder="5" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Prisregler</label>
+                    <frontend_model>CoolRunner\Shipping\Block\Adminhtml\Form\Field\PriceRules</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <comment>Opsæt forskellige prisregler ud fra vægt, pris, postnummer mm.</comment>
+                </field>
             </group>
-        </section>
 
-        <section id="cr_cooleurope" translate="label" type="text" sortOrder="301" showInDefault="0" showInWebsite="1" showInStore="1">
-            <class>separator-top</class>
-            <label>CoolEurope</label>
-            <tab>coolrunner</tab>
-            <resource>CoolRunner_Shipping::coolrunner_config</resource>
-            <group id="activation" translate="label" type="text" sortOrder="10" showInDefault="0" showInWebsite="1" showInStore="1">
-                <label>CoolEurope indstillinger</label>
-                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
-                    <label>Aktiver CoolEurope</label>
+            <group id="cr_postnord" translate="label" type="text" sortOrder="2" showInDefault="0" showInWebsite="1" showInStore="1">
+                <label>CoolRunner: PostNord</label>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Aktiver</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Vælge om leverandøren skal være aktiv</comment>
                 </field>
@@ -238,6 +235,12 @@
                     <frontend_model>CoolRunner\Shipping\Block\Adminhtml\Form\Field\Methods</frontend_model>
                     <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
                     <comment>Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet "Priser".</comment>
+                </field>
+                <field id="pricerules" translate="label" sortOrder="5" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Prisregler</label>
+                    <frontend_model>CoolRunner\Shipping\Block\Adminhtml\Form\Field\PriceRules</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <comment>Opsæt forskellige prisregler ud fra vægt, pris, postnummer mm.</comment>
                 </field>
             </group>
         </section>

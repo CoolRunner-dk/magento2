@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace CoolRunner\Shipping\Block\Adminhtml\Form\Field;
 
+use CoolRunner\Shipping\Model\Carrier\Bring;
 use Magento\Framework\View\Element\Html\Select;
 
 class ConditionColumn extends Select
@@ -45,8 +46,10 @@ class ConditionColumn extends Select
     private function getSourceOptions(): array
     {
         return [
-            ['value' => 'weight', 'label' => 'Vægt'],
-            ['value' => 'price', 'label' => 'Pris']
+            ['value' => 'weight', 'label' => 'Vægt (g)'],
+            ['value' => 'price', 'label' => 'Pris'],
+            ['value' => 'postcode', 'label' => 'Postnurmmer'],
+            ['value' => 'productamount', 'label' => 'Vareantal']
         ];
     }
 }

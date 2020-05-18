@@ -3,10 +3,25 @@ declare(strict_types=1);
 
 namespace CoolRunner\Shipping\Block\Adminhtml\Form\Field;
 
+use CoolRunner\Shipping\Controller\Adminhtml\Curl\Coolrunner;
+use Magento\Framework\View\Element\Context;
 use Magento\Framework\View\Element\Html\Select;
+use Psr\Log\LoggerInterface;
 
 class MethodColumn extends Select
 {
+    protected $_curl;
+    protected $_logger;
+    protected $_crCurl;
+    protected $carrierInputName;
+
+    public function __construct(Context $context, LoggerInterface $logger)
+    {
+        $this->_logger = $logger;
+
+        parent::__construct($context);
+    }
+
     /**
      * Set "name" for <select> element
      *
@@ -36,17 +51,26 @@ class MethodColumn extends Select
      */
     public function _toHtml(): string
     {
-        if (!$this->getOptions()) {
-            $this->setOptions($this->getSourceOptions());
-        }
+        $nameExploded = explode('[', str_replace(['groups', ']', 'cr_', '[<%- _id %>[method'], '', $this->getName()));
+        $this->setOptions($this->getSourceOptions($nameExploded[1]));
+
         return parent::_toHtml();
     }
 
-    private function getSourceOptions(): array
+    private function getSourceOptions($carrier)
     {
-        return [
-            ['value' => 'testproduct1', 'label' => 'Test produkt 1'],
-            ['value' => 'testproduct2', 'label' => 'Test produkt 2']
-        ];
+        $crCurl = new Coolrunner();
+        $products = $crCurl->getProductsByCarrier($carrier);
+        $optionArray = [];
+        $alreadyAdded = [];
+
+        foreach ($products as $product) {
+            if (!isset($alreadyAdded[$product['value']])) {
+                $optionArray[] = ['value' => $product['value'], 'label' => $product['label']];
+                $alreadyAdded[$product['value']] = 1;
+            }
+        }
+
+        return $optionArray;
     }
 }

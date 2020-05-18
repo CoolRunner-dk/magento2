@@ -6,53 +6,47 @@
                 <enable>0</enable>
             </activation>
         </cr_settings>
-        <cr_homerunner>
-            <activation>
-                <enable>0</enable>
+        <carriers>
+            <cr_homerunner>
+                <active>0</active>
                 <carrierimage>images/homerunner_grey.png</carrierimage>
-            </activation>
-        </cr_homerunner>
-        <cr_dhl>
-            <activation>
-                <enable>0</enable>
-                <carrierimage>images/dhl.png</carrierimage>
-            </activation>
-        </cr_dhl>
-        <cr_gls>
-            <activation>
-                <enable>0</enable>
-                <carrierimage>images/gls.png</carrierimage>
-            </activation>
-        </cr_gls>
-        <cr_postnord>
-            <activation>
-                <enable>0</enable>
-                <carrierimage>images/pdk.png</carrierimage>
-            </activation>
-        </cr_postnord>
-        <cr_dao>
-            <activation>
-                <enable>0</enable>
-                <carrierimage>images/dao.png</carrierimage>
-            </activation>
-        </cr_dao>
-        <cr_bring>
-            <activation>
-                <enable>0</enable>
+                <model>CoolRunner\Shipping\Model\Carrier\HomeRunner</model>
+            </cr_homerunner>
+            <cr_bring>
+                <active>0</active>
                 <carrierimage>images/bring.png</carrierimage>
-            </activation>
-        </cr_bring>
-        <cr_posti>
-            <activation>
-                <enable>0</enable>
-                <carrierimage>images/posti.png</carrierimage>
-            </activation>
-        </cr_posti>
-        <cr_cooleurope>
-            <activation>
-                <enable>0</enable>
+                <model>CoolRunner\Shipping\Model\Carrier\Bring</model>
+            </cr_bring>
+            <cr_coolrunner>
+                <active>0</active>
                 <carrierimage>images/coolrunner.png</carrierimage>
-            </activation>
-        </cr_cooleurope>
+                <model>CoolRunner\Shipping\Model\Carrier\CoolRunner</model>
+            </cr_coolrunner>
+            <cr_dao>
+                <active>0</active>
+                <carrierimage>images/dao.png</carrierimage>
+                <model>CoolRunner\Shipping\Model\Carrier\DAO</model>
+            </cr_dao>
+            <cr_dhl>
+                <active>0</active>
+                <carrierimage>images/dhl.png</carrierimage>
+                <model>CoolRunner\Shipping\Model\Carrier\DHL</model>
+            </cr_dhl>
+            <cr_gls>
+                <active>0</active>
+                <carrierimage>images/gls.png</carrierimage>
+                <model>CoolRunner\Shipping\Model\Carrier\GLS</model>
+            </cr_gls>
+            <cr_posti>
+                <active>0</active>
+                <carrierimage>images/posti.png</carrierimage>
+                <model>CoolRunner\Shipping\Model\Carrier\Posti</model>
+            </cr_posti>
+            <cr_postnord>
+                <active>0</active>
+                <carrierimage>images/postnord.png</carrierimage>
+                <model>CoolRunner\Shipping\Model\Carrier\Posti</model>
+            </cr_postnord>
+        </carriers>
     </default>
 </config>

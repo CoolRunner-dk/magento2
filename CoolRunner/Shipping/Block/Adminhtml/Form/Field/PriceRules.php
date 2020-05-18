@@ -4,12 +4,11 @@ namespace CoolRunner\Shipping\Block\Adminhtml\Form\Field;
 use Magento\Config\Block\System\Config\Form\Field\FieldArray\AbstractFieldArray;
 use Magento\Framework\DataObject;
 use Magento\Framework\Exception\LocalizedException;
-use Psr\Log\LoggerInterface;
 
 /**
  * Class Ranges
  */
-class Methods extends AbstractFieldArray
+class PriceRules extends AbstractFieldArray
 {
     private $methodRenderer;
     private $conditionRenderer;
@@ -21,11 +20,17 @@ class Methods extends AbstractFieldArray
             'renderer' => $this->getMethodRenderer()
         ]);
 
-        $this->addColumn('methodname', ['label' => __('Metodenavn'), 'class' => 'required-entry']);
+        $this->addColumn('condition', [
+            'label' => __('Betingelse'),
+            'renderer' => $this->getConditionRenderer()
+        ]);
+
+        $this->addColumn('condition_from', ['label' => __('Fra'), 'class' => 'required-entry']);
+        $this->addColumn('condition_to', ['label' => __('Til'), 'class' => 'required-entry']);
         $this->addColumn('price', ['label' => __('Pris'), 'class' => 'required-entry']);
 
         $this->_addAfter = false;
-        $this->_addButtonLabel = __('Tilføj forsendelsesmetode');
+        $this->_addButtonLabel = __('Tilføj prisregel');
     }
 
     /**
@@ -55,7 +60,6 @@ class Methods extends AbstractFieldArray
                 ['data' => ['is_render_to_js_template' => true]]
             );
         }
-
         return $this->methodRenderer;
     }
 
@@ -78,10 +82,14 @@ class Methods extends AbstractFieldArray
             $this->_columns[$columnName]['style'] = 'width:40px';
         }
 
+        if ($columnName == "condition_from" or $columnName == "condition_to") {
+            $this->_columns[$columnName]['class'] = 'input-text required-entry validate-number';
+            $this->_columns[$columnName]['style'] = 'width:60px';
+        }
+
         if ($columnName == "methodname") {
             $this->_columns[$columnName]['style'] = 'width:250px';
         }
-
 
         return parent::renderCellTemplate($columnName);
     }

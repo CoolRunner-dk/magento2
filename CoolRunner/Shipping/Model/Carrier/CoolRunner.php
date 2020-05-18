@@ -2,7 +2,6 @@
 
 namespace CoolRunner\Shipping\Model\Carrier;
 
-use CoolRunner\Shipping\Controller\Adminhtml\Shipping\Prices;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\DataObject;
 use Magento\Quote\Model\Quote\Address\RateRequest;
@@ -14,7 +13,7 @@ use Magento\Shipping\Model\Carrier\CarrierInterface;
 use Magento\Shipping\Model\Rate\ResultFactory;
 use Psr\Log\LoggerInterface;
 
-class Bring extends AbstractCarrier implements CarrierInterface
+class CoolRunner extends AbstractCarrier implements CarrierInterface
 {
 
     /**
@@ -24,8 +23,8 @@ class Bring extends AbstractCarrier implements CarrierInterface
      * @var string
      */
 
-    protected $_code = 'cr_bring';
-    protected $_carrierTitle = "Bring";
+    protected $_code = 'cr_coolrunner';
+    protected $_carrierTitle = "CoolRunner";
 
     /**
      * Whether this carrier has fixed rates calculation
@@ -105,8 +104,6 @@ class Bring extends AbstractCarrier implements CarrierInterface
         /** @var \Magento\Shipping\Model\Rate\Result $result */
         $result = $this->_rateResultFactory->create();
 
-
-
         foreach ($crMethods as $crMethod) {
             $shippingPrice = $crMethod->price;
 
@@ -175,5 +172,4 @@ class Bring extends AbstractCarrier implements CarrierInterface
 
         return $result;
     }
-
 }
