@@ -1,0 +1,194 @@
+<style>
+    table.coolrunner-table {
+        width: 100%;
+        font-size: 1.3rem;
+    }
+
+    table.coolrunner-table tr td:last-of-type {
+        text-align: right;
+        font-weight: bold;
+        padding-right: 10px;
+    }
+
+    table.coolrunner-table tr td:first-of-type {
+        padding-left: 10px;
+    }
+
+    table.coolrunner-table tr td {
+        padding-bottom: 10px;
+        padding-top: 10px;
+    }
+
+    table.coolrunner-table tr:last-of-type {
+        border-bottom: 2px solid #e3e3e3;
+    }
+
+    table.coolrunner-table tr:nth-child(2n) {
+        background: #f1f1f1;
+    }
+
+    table.coolrunner-table a {
+        color: #504943;
+    }
+
+    button.coolrunner-button a {
+        color: #3697d6;
+    }
+
+    button.coolrunner-button {
+        background: #3697d6;
+        border: 1px solid #3697d6;
+        color: white;
+        text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.25);
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    button.coolrunner-button:first-of-type {
+        border-top-left-radius: 4px;
+    }
+
+    button.coolrunner-button:nth-child(2) {
+        border-top-right-radius: 4px;
+    }
+
+    button.coolrunner-button:last-of-type {
+        background: white;
+        border: 1px solid white;
+        color: gray;
+        text-shadow: none;
+    }
+
+    button.coolrunner-button:nth-child(2) {
+        margin-left: -5px;
+        background: #a3b0b9;
+        border: 1px solid #a3b0b9;
+    }
+
+    .admin__page-section-content.coolrunner {
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        border-bottom: 2px solid #e3e3e3;
+    }
+
+    .coolrunner-buttons {
+        width: 50%;
+        float: left;
+    }
+
+    .admin__page-section-title.coolrunner {
+        border-bottom: 0px !important;
+        margin-bottom: 0px !important;
+    }
+
+    .coolrunner-main {
+        margin-bottom: 20px;
+    }
+
+    .coolrunner-status {
+        float: left;
+        padding-top: 10px;
+        text-align: right;
+        width: 50%;
+        color: gray;
+        padding-right: 10px;
+    }
+
+    .coolrunner-status span {
+        text-transform: uppercase;
+        font-weight: bold;
+        margin-left: 20px;
+        font-size: 1.3rem;
+    }
+
+    table.coolrunner-table th:first-of-type {
+        padding-left: 10px;
+        text-align: left;
+    }
+
+    table.coolrunner-table th:nth-child(2) {
+        text-align: left;
+    }
+
+    table.coolrunner-table th:last-of-type {
+        padding-right: 10px;
+    }
+
+    table.coolrunner-table th:nth-child(3), table.coolrunner-table th:nth-child(4),
+    table.coolrunner-table tr td:nth-child(3), table.coolrunner-table tr td:nth-child(4) {
+        text-align: center;
+    }
+
+    table.coolrunner-table th:last-of-type {
+        text-align: right;
+    }
+
+    table.coolrunner-table thead th {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background: #f1f1f1;
+    }
+</style>
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+?>
+<div class="coolrunner-main">
+    <div class="admin__page-section-title coolrunner">
+        <span class="title"><img src="https://i.imgur.com/3Se87df.png"></span>
+    </div>
+    <div class="admin__page-section-content coolrunner">
+        <div class="coolrunner-buttons">
+            <button class="coolrunner-button">Opret label</button>
+            <button class="coolrunner-button">Ret forsendelsesmetode</button>
+            <button class="coolrunner-button"><a href="http://coolrunner.dk/">Gå til CoolRunner.dk</a></button>
+        </div>
+        <div class="coolrunner-status">
+            <span>Carrier:</span> bring
+            <span>Service:</span> private
+            <span>Product:</span> delivery
+        </div>
+    </div>
+    <div class="admin__page-section-content">
+        <table class="coolrunner-table">
+            <thead>
+                <th>Pakkenummer</th>
+                <th>Tidspunkt</th>
+                <th>Pris eksl. moms</th>
+                <th>Pris inkl. moms</th>
+                <th></th>
+            </thead>
+            <tbody>
+                <!-- Handle foreach of each shipments created for this order -->
+                <tr>
+                    <td>00057126960882411886</td>
+                    <td>09-06-2020 10:21</td>
+                    <td>42.20 DKK</td>
+                    <td>69.00 DKK</td>
+                    <td><a href="">Track denne forsendelse<a/></td>
+                </tr>
+                <tr>
+                    <td>TYPQXCF00655155</td>
+                    <td>09-06-2020 11:31</td>
+                    <td>62.20 DKK</td>
+                    <td>89.00 DKK</td>
+                    <td><a href="">Track denne forsendelse<a/></td>
+                </tr>
+                <tr>
+                    <td>TYPQXCF00655155</td>
+                    <td>09-06-2020 11:31</td>
+                    <td>62.20 DKK</td>
+                    <td>89.00 DKK</td>
+                    <td><a href="">Track denne forsendelse<a/></td>
+                </tr>
+                <tr>
+                    <td>TYPQXCF00655155</td>
+                    <td>09-06-2020 11:31</td>
+                    <td>62.20 DKK</td>
+                    <td>89.00 DKK</td>
+                    <td><a href="">Track denne forsendelse<a/></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,6 +1,7 @@
 <?php
 namespace CoolRunner\Shipping\Controller\Adminhtml\Curl;
 
+use CoolRunner\Shipping\Helper\Data;
 use Magento\Framework\HTTP\Client\Curl;
 
 class Coolrunner
@@ -8,19 +9,24 @@ class Coolrunner
     protected $_publicActions = ['coolrunner'];
     protected $_curl;
     protected $_objectManager;
+
+    /**
+     * @var Data
+     * */
+    protected $_helper;
     private $products;
 
-    public function __construct()
+    public function __construct($storeId)
     {
-        // TODO: Get username from settings
-        $userName = "kq+firma@tric.dk";
+        $this->_objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $this->_helper = $this->_objectManager->create('CoolRunner\Shipping\Helper\Data');
 
-        // TODO: Get password from settings
-        $password = "ni238ebe1zz3qgbmra3lfreozit5h6qu";
+        // Handle curl and authentication
+        $userName = $this->_helper->getCredentialsConfig('cr_username', $storeId);
+        $password = $this->_helper->getCredentialsConfig('cr_token', $storeId);
 
         $this->_curl = new Curl();
         $this->_curl->setCredentials($userName, $password);
-        $this->_objectManager = \Magento\Framework\App\ObjectManager::getInstance();
     }
 
     /**
@@ -28,20 +34,25 @@ class Coolrunner
      */
     public function execute()
     {
+        // Do nothing
     }
 
     private function addProducts($carrier, $products)
     {
-        $resource = $this->_objectManager->get('Magento\Framework\App\ResourceConnection');
-        $connection = $resource->getConnection();
-        $tableName = $resource->getTableName('coolrunner_products'); //gives table name with prefix
+        if (!empty($products)) {
+            // Add products to DB in table called coolrunner_products
+            $resource = $this->_objectManager->get('Magento\Framework\App\ResourceConnection');
+            $connection = $resource->getConnection();
+            $tableName = $resource->getTableName('coolrunner_products');
 
-        $sql = "INSERT INTO " . $tableName . " (carrier, products) Values ('{$carrier}', '{$products}')";
-        $connection->query($sql);
+            $sql = "INSERT INTO " . $tableName . " (carrier, products) Values ('{$carrier}', '{$products}')";
+            $connection->query($sql);
+        }
     }
 
     private function getProducts($carrier)
     {
+        // Get products from DB in table called coolrunner_products
         $resource = $this->_objectManager->get('Magento\Framework\App\ResourceConnection');
         $connection = $resource->getConnection();
         $tableName = $resource->getTableName('coolrunner_products');
@@ -53,6 +64,7 @@ class Coolrunner
 
     public function getProductsByCarrier($carrier)
     {
+        // Checks if products is saved in DB and if not get these from Coolrunner and saves to DB
         if (empty($this->getProducts($carrier))) {
             if (!isset($this->products) or $this->products == '') {
                 $this->_curl->get('https://api.coolrunner.dk/v3/products/dk');
@@ -68,7 +80,7 @@ class Coolrunner
         }
 
         $this->products = json_decode($this->getProducts($carrier)[0]['products']);
-        $formatedProducts = [];
+        $formattedProducts = [];
 
         foreach ($this->products as $productType => $services) {
             foreach ($services as $service) {
@@ -78,11 +90,15 @@ class Coolrunner
                     } else {
                         $label = '';
                     }
-                    $formatedProducts[] = ['value' => strtoupper($carrier) . '_' . strtoupper($productType) . '_' . strtoupper($service->services[0]->code), 'label' => strtoupper($carrier) . '_' . strtoupper($productType) . $label];
+
+                    $formattedProducts[] = [
+                        'value' => strtoupper($carrier) . '_' . strtoupper($productType) . $label,
+                        'label' => strtoupper($carrier) . '_' . strtoupper($productType) . $label
+                    ];
                 }
             }
         }
 
-        return $formatedProducts;
+        return $formattedProducts;
     }
 }
