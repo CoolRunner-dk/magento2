@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="CoolRunner_Shipping::shipping" title="CoolRunner" module="CoolRunner_Shipping" sortOrder="51" resource="CoolRunner_Shipping::shipping"/>
+        <add id="CoolRunner_Shipping::labels" title="Pakkelabels" module="CoolRunner_Shipping" sortOrder="10" action="coolrunner_shipping/labels" resource="CoolRunner_Shipping::labels" parent="CoolRunner_Shipping::shipping"/>
+        <add id="CoolRunner_Shipping::config" title="Indstillinger" module="CoolRunner_Shipping" sortOrder="10" action="admin/system_config/edit/section/cr_settings" resource="CoolRunner_Shipping::config" parent="CoolRunner_Shipping::shipping"/>
+    </menu>
+</config>
