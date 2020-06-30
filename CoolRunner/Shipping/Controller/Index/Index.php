@@ -20,16 +20,6 @@ class Index extends Action
 
     public function execute()
     {
-        $label = $this->_labelsFactory->create();
-        $collection = $label->getCollection();
-
-        foreach ($collection as $item) {
-            echo "<pre>";
-            print_r($item->getData());
-            echo "</pre>";
-        }
-        exit();
-
-        return $this->_pageFactory->create();
+        // Might be used later?
     }
 }

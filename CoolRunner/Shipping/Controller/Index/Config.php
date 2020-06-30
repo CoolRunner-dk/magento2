@@ -18,13 +18,6 @@ class Config extends Action
 
     public function execute()
     {
-        $data = [
-            'cr_username' => $this->helperData->getCredentialsConfig('cr_username', 1),
-            'cr_token' => $this->helperData->getCredentialsConfig('cr_token', 1),
-            'cr_activation' => $this->helperData->getActivationConfig('enable', 1)
-        ];
-
-        print_r($data);
-        exit();
+        // Might be used later?
     }
 }

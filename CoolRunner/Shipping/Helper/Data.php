@@ -15,7 +15,6 @@ class Data extends AbstractHelper
     public function __construct(Context $context)
     {
         $this->_objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-
         parent::__construct($context);
     }
 
@@ -44,23 +43,21 @@ class Data extends AbstractHelper
         return $this->getConfigValue(self::XML_PATH_CRSETTINGS . 'activation/' . $code, $storeId);
     }
 
-    public function createShipment($shipmentData, $agreementType, $storeId, $orderId)
+    public function createShipment($shipmentData, $agreementType, $orderId, $makeShipment)
     {
-        $coolRunner = $this->_objectManager->create('CoolRunner\Shipping\Controller\Adminhtml\Curl\CoolRunner');
-        $coolRunner->createShipment($shipmentData, $agreementType, $storeId, $orderId);
+        $coolRunner = $this->_objectManager->get('CoolRunner\Shipping\Controller\Adminhtml\Curl\CoolRunner');
+        $coolRunner->createShipment($shipmentData, $agreementType, $orderId, $makeShipment);
     }
 
     public function getShippingLabels($orderId, $storeId)
     {
-        $coolRunner = $this->_objectManager->create('CoolRunner\Shipping\Controller\Adminhtml\Curl\CoolRunner');
+        $coolRunner = $this->_objectManager->get('CoolRunner\Shipping\Controller\Adminhtml\Curl\CoolRunner');
         return $coolRunner->getShippingLabels($orderId, $storeId);
     }
 
     public function findClosestDroppoints($carrier, $countryCode, $street, $zipCode, $city)
     {
-        $coolRunner = $this->_objectManager->create('CoolRunner\Shipping\Controller\Adminhtml\Curl\CoolRunner');
-        $droppoints = $coolRunner->getNearestDroppoints($carrier, $countryCode, $street, $zipCode, $city);
-
-        return $droppoints;
+        $coolRunner = $this->_objectManager->get('CoolRunner\Shipping\Controller\Adminhtml\Curl\CoolRunner');
+        return $coolRunner->getNearestDroppoints($carrier, $countryCode, $street, $zipCode, $city);
     }
 }

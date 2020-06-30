@@ -1,7 +1,6 @@
 <?php
 namespace CoolRunner\Shipping\Controller\Adminhtml\Order;
 
-use CoolRunner\Shipping\Controller\Adminhtml\Curl\Coolrunner;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Controller\ResultFactory;
@@ -30,7 +29,6 @@ class CreateLabels extends Action
 
     public function execute()
     {
-        // TODO: Implement execute() method.
         try {
             $collection = $this->filter->getCollection($this->collectionFactory->create());
 
@@ -43,15 +41,16 @@ class CreateLabels extends Action
                 $orderLines = [];
                 $shipmentData = [];
                 $totalWeight = 0;
+                $orderShippingAddress = $order->getShippingAddress();
 
                 // Find closest droppoint
                 if ($service == 'droppoint' or $service == 'servicepoint') {
                     $closestDroppoints = $this->_helper->findClosestDroppoints(
                         $carrier,
-                        $order->getShippingAddress()->getCountryId(),
-                        $order->getShippingAddress()->getStreet()[0],
-                        $order->getShippingAddress()->getPostcode(),
-                        $order->getShippingAddress()->getCity()
+                        $orderShippingAddress->getCountryId(),
+                        $orderShippingAddress->getStreet()[0],
+                        $orderShippingAddress->getPostcode(),
+                        $orderShippingAddress->getCity()
                     );
 
                     $closest = $closestDroppoints->servicepoints[0];
@@ -59,8 +58,17 @@ class CreateLabels extends Action
 
                 // Handle orderlines for PCN and to get weight
                 foreach ($order->getAllItems() as $orderItem) {
+                    // Check if order item has qty to ship or is virtual
+                    if ($orderItem->getIsVirtual()) {
+                        continue;
+                    }
+
                     $orderLines[] = ['item_number' => $orderItem->getSku(), 'qty' => number_format($orderItem->getQtyOrdered(), 0)];
                     $totalWeight += ($orderItem->getWeight()*1000);
+                }
+
+                if ($totalWeight == 0) {
+                    $totalWeight = 1000;
                 }
 
                 if ($this->_helper->getAgreementConfig('cr_type', $order->getStoreId()) == 'normal') {
@@ -79,15 +87,15 @@ class CreateLabels extends Action
                         "receiver" => [
                             "name" => $order->getCustomerName(),
                             "attention" => "",
-                            "street1" => $order->getShippingAddress()->getStreet()[0],
-                            "street2" => $order->getShippingAddress()->getStreet()[1] ?? "",
-                            "zip_code" => $order->getShippingAddress()->getPostcode(),
-                            "city" => $order->getShippingAddress()->getCity(),
-                            "country" => $order->getShippingAddress()->getCountryId(),
-                            "phone" => $order->getShippingAddress()->getTelephone(),
-                            "email" => $order->getShippingAddress()->getEmail(),
-                            "notify_sms" => $order->getShippingAddress()->getTelephone(),
-                            "notify_email" => $order->getShippingAddress()->getEmail()
+                            "street1" => $orderShippingAddress->getStreet()[0],
+                            "street2" => $orderShippingAddress->getStreet()[1] ?? "",
+                            "zip_code" => $orderShippingAddress->getPostcode(),
+                            "city" => $orderShippingAddress->getCity(),
+                            "country" => $orderShippingAddress->getCountryId(),
+                            "phone" => $orderShippingAddress->getTelephone(),
+                            "email" => $orderShippingAddress->getEmail(),
+                            "notify_sms" => $orderShippingAddress->getTelephone(),
+                            "notify_email" => $orderShippingAddress->getEmail()
                         ],
                         "length" => "15",
                         "width" => "15",
@@ -105,17 +113,17 @@ class CreateLabels extends Action
                 } elseif ($this->_helper->getAgreementConfig('cr_type', $order->getStoreId()) == 'pcn') {
                     $shipmentData = [
                         "order_number" => $order->getRealOrderId(),
-                        "receiver_name" => $order->getShippingAddress()->getName(),
+                        "receiver_name" => $orderShippingAddress->getName(),
                         "receiver_attention" => "",
-                        "receiver_street1" => $order->getShippingAddress()->getStreet()[0],
-                        "receiver_street2" => $order->getShippingAddress()->getStreet()[1] ?? "",
-                        "receiver_zipcode" => $order->getShippingAddress()->getPostcode(),
-                        "receiver_city" => $order->getShippingAddress()->getCity(),
-                        "receiver_country" => $order->getShippingAddress()->getCountryId(),
-                        "receiver_phone" => $order->getShippingAddress()->getTelephone(),
-                        "receiver_email" => $order->getShippingAddress()->getEmail(),
-                        "receiver_notify_sms" => $order->getShippingAddress()->getTelephone(),
-                        "receiver_notify_email" => $order->getShippingAddress()->getEmail(),
+                        "receiver_street1" => $orderShippingAddress->getStreet()[0],
+                        "receiver_street2" => $orderShippingAddress->getStreet()[1] ?? "",
+                        "receiver_zipcode" => $orderShippingAddress->getPostcode(),
+                        "receiver_city" => $orderShippingAddress->getCity(),
+                        "receiver_country" => $orderShippingAddress->getCountryId(),
+                        "receiver_phone" => $orderShippingAddress->getTelephone(),
+                        "receiver_email" => $orderShippingAddress->getEmail(),
+                        "receiver_notify_sms" => $orderShippingAddress->getTelephone(),
+                        "receiver_notify_email" => $orderShippingAddress->getEmail(),
                         "droppoint_id" => $closest->id ?? 0,
                         "droppoint_name" => $closest->name ?? "",
                         "droppoint_street1" => $closest->address->street ?? "",
@@ -132,7 +140,7 @@ class CreateLabels extends Action
                     ];
                 }
 
-                $this->_helper->createShipment($shipmentData, $this->_helper->getAgreementConfig('cr_type', $order->getStoreId()), $order->getStoreId(), $order->getRealOrderId());
+                $this->_helper->createShipment($shipmentData, $this->_helper->getAgreementConfig('cr_type', $order->getStoreId()), $order->getRealOrderId(), $this->_helper->getAgreementConfig('cr_makeshipment', $order->getStoreId()));
             }
             $this->messageManager->addSuccessMessage('Gennemført oprettelse af label på de valgte ordre.');
             $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);

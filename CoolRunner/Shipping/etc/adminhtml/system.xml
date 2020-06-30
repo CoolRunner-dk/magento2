@@ -40,6 +40,11 @@
                     <comment>Vælge størrelsen på dit printformat.</comment>
                     <source_model>CoolRunner\Shipping\Model\Config\Source\PrintTypes</source_model>
                 </field>
+                <field id="cr_makeshipment" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Opret "Shipment" ved ny label</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Efter oprettelse af ny ordre kan du vælge om magento skal oprette en ny shipment for ordren</comment>
+                </field>
             </group>
         </section>
 
@@ -51,15 +56,11 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Vælge om leverandøren skal være aktiv</comment>
                 </field>
-                <field id="carrierimage" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Logo URL</label>
-                    <comment>Indtast en URL for ønsket logo der skal fremvises i checkout</comment>
-                </field>
                 <field id="methods" translate="label" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Metoder</label>
                     <frontend_model>CoolRunner\Shipping\Block\Adminhtml\Form\Field\Methods</frontend_model>
                     <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
-                    <comment>Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet "Priser".</comment>
+                    <comment>Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet "Priser". Pakkeshop finder altid kundens nærmeste pakkeshop.</comment>
                 </field>
                 <field id="pricerules" translate="label" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Prisregler</label>
@@ -76,15 +77,11 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Vælge om leverandøren skal være aktiv</comment>
                 </field>
-                <field id="carrierimage" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Logo URL</label>
-                    <comment>Indtast en URL for ønsket logo der skal fremvises i checkout</comment>
-                </field>
                 <field id="methods" translate="label" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Metoder</label>
                     <frontend_model>CoolRunner\Shipping\Block\Adminhtml\Form\Field\Methods</frontend_model>
                     <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
-                    <comment>Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet "Priser".</comment>
+                    <comment>Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet "Priser". Pakkeshop finder altid kundens nærmeste pakkeshop.</comment>
                 </field>
                 <field id="pricerules" translate="label" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Prisregler</label>
@@ -101,15 +98,11 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Vælge om leverandøren skal være aktiv</comment>
                 </field>
-                <field id="carrierimage" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Logo URL</label>
-                    <comment>Indtast en URL for ønsket logo der skal fremvises i checkout</comment>
-                </field>
                 <field id="methods" translate="label" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Metoder</label>
                     <frontend_model>CoolRunner\Shipping\Block\Adminhtml\Form\Field\Methods</frontend_model>
                     <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
-                    <comment>Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet "Priser".</comment>
+                    <comment>Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet "Priser". Pakkeshop finder altid kundens nærmeste pakkeshop.</comment>
                 </field>
                 <field id="pricerules" translate="label" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Prisregler</label>
@@ -126,15 +119,11 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Vælge om leverandøren skal være aktiv</comment>
                 </field>
-                <field id="carrierimage" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Logo URL</label>
-                    <comment>Indtast en URL for ønsket logo der skal fremvises i checkout</comment>
-                </field>
                 <field id="methods" translate="label" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Metoder</label>
                     <frontend_model>CoolRunner\Shipping\Block\Adminhtml\Form\Field\Methods</frontend_model>
                     <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
-                    <comment>Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet "Priser".</comment>
+                    <comment>Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet "Priser". Pakkeshop finder altid kundens nærmeste pakkeshop.</comment>
                 </field>
                 <field id="pricerules" translate="label" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Prisregler</label>
@@ -151,15 +140,11 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Vælge om leverandøren skal være aktiv</comment>
                 </field>
-                <field id="carrierimage" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Logo URL</label>
-                    <comment>Indtast en URL for ønsket logo der skal fremvises i checkout</comment>
-                </field>
                 <field id="methods" translate="label" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Metoder</label>
                     <frontend_model>CoolRunner\Shipping\Block\Adminhtml\Form\Field\Methods</frontend_model>
                     <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
-                    <comment>Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet "Priser".</comment>
+                    <comment>Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet "Priser". Pakkeshop finder altid kundens nærmeste pakkeshop.</comment>
                 </field>
                 <field id="pricerules" translate="label" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Prisregler</label>
@@ -176,15 +161,11 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Vælge om leverandøren skal være aktiv</comment>
                 </field>
-                <field id="carrierimage" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Logo URL</label>
-                    <comment>Indtast en URL for ønsket logo der skal fremvises i checkout</comment>
-                </field>
                 <field id="methods" translate="label" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Metoder</label>
                     <frontend_model>CoolRunner\Shipping\Block\Adminhtml\Form\Field\Methods</frontend_model>
                     <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
-                    <comment>Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet "Priser".</comment>
+                    <comment>Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet "Priser". Pakkeshop finder altid kundens nærmeste pakkeshop.</comment>
                 </field>
                 <field id="pricerules" translate="label" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Prisregler</label>
@@ -201,15 +182,11 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Vælge om leverandøren skal være aktiv</comment>
                 </field>
-                <field id="carrierimage" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Logo URL</label>
-                    <comment>Indtast en URL for ønsket logo der skal fremvises i checkout</comment>
-                </field>
                 <field id="methods" translate="label" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Metoder</label>
                     <frontend_model>CoolRunner\Shipping\Block\Adminhtml\Form\Field\Methods</frontend_model>
                     <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
-                    <comment>Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet "Priser".</comment>
+                    <comment>Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet "Priser". Pakkeshop finder altid kundens nærmeste pakkeshop.</comment>
                 </field>
                 <field id="pricerules" translate="label" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Prisregler</label>
@@ -226,15 +203,11 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Vælge om leverandøren skal være aktiv</comment>
                 </field>
-                <field id="carrierimage" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Logo URL</label>
-                    <comment>Indtast en URL for ønsket logo der skal fremvises i checkout</comment>
-                </field>
                 <field id="methods" translate="label" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Metoder</label>
                     <frontend_model>CoolRunner\Shipping\Block\Adminhtml\Form\Field\Methods</frontend_model>
                     <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
-                    <comment>Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet "Priser".</comment>
+                    <comment>Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet "Priser". Pakkeshop finder altid kundens nærmeste pakkeshop.</comment>
                 </field>
                 <field id="pricerules" translate="label" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Prisregler</label>
