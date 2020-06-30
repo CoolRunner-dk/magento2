@@ -214,9 +214,9 @@ class Coolrunner
         unset($shipment);
     }
 
-    public function getShippingLabels($orderId, $storeId)
+    public function getShippingLabels($orderId)
     {
-        // Get products from DB in table called coolrunner_products
+        // Get shipping labels from DB in table called coolrunner_shipping_labels
         $curl = new Curl();
         $curl->setCredentials($this->username, $this->password);
         $curl->addHeader("X-Developer-Id", "Magento2");

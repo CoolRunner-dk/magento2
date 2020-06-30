@@ -49,10 +49,10 @@ class Data extends AbstractHelper
         $coolRunner->createShipment($shipmentData, $agreementType, $orderId, $makeShipment);
     }
 
-    public function getShippingLabels($orderId, $storeId)
+    public function getShippingLabels($orderId)
     {
         $coolRunner = $this->_objectManager->get('CoolRunner\Shipping\Controller\Adminhtml\Curl\CoolRunner');
-        return $coolRunner->getShippingLabels($orderId, $storeId);
+        return $coolRunner->getShippingLabels($orderId);
     }
 
     public function findClosestDroppoints($carrier, $countryCode, $street, $zipCode, $city)
