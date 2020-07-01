@@ -46,9 +46,12 @@ class PrintLabels extends Action
                 }
             }
 
-            // Handle print of pdf (merge)
-            // Handles the array structure before rendering and showing as PFD (no download)
-            // If want download then use $pdfMerged->save('pdfname.pdf') instead of render()
+            /*
+             * Handle print of pdf (merge)
+             * Handles the array structure before rendering and showing as PFD (no download)
+             * If want download then use $pdfMerged->save('pdfname.pdf') instead of render()
+             */
+
             $checked = 0;
             $finalArray = [];
             while ($checked < count($allLabels)) {

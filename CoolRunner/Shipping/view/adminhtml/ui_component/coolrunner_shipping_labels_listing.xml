@@ -5,14 +5,7 @@
             <item name="deps" xsi:type="string">coolrunner_shipping_labels_listing.coolrunner_shipping_labels_listing_data_source</item>
         </item>
         <item name="spinner" xsi:type="string">spinner_columns</item>
-        <item name="buttons" xsi:type="array">
-            <item name="add" xsi:type="array">
-                <item name="name" xsi:type="string">add</item>
-                <item name="label" xsi:type="string" translate="true">Print labels</item>
-                <item name="class" xsi:type="string">primary</item>
-                <item name="url" xsi:type="string">*/*/print</item>
-            </item>
-        </item>
+
     </argument>
     <dataSource name="nameOfDataSource">
         <argument name="dataProvider" xsi:type="configurableObject">
