@@ -38,23 +38,16 @@ class CreateLabels extends Action
                 $carrier = $explodedMethod[1];
                 $product = $explodedMethod[4];
                 $service = $explodedMethod[5];
+
+                if ($service == 'droppoint' or $service == 'servicepoint') {
+                    $droppointId = $explodedMethod[6];
+                    $droppointData = $this->_helper->findDroppointById($carrier, $droppointId);
+                }
+
                 $orderLines = [];
                 $shipmentData = [];
                 $totalWeight = 0;
                 $orderShippingAddress = $order->getShippingAddress();
-
-                // Find closest droppoint
-                if ($service == 'droppoint' or $service == 'servicepoint') {
-                    $closestDroppoints = $this->_helper->findClosestDroppoints(
-                        $carrier,
-                        $orderShippingAddress->getCountryId(),
-                        $orderShippingAddress->getStreet()[0],
-                        $orderShippingAddress->getPostcode(),
-                        $orderShippingAddress->getCity()
-                    );
-
-                    $closest = $closestDroppoints->servicepoints[0];
-                }
 
                 // Handle orderlines for PCN and to get weight
                 foreach ($order->getAllItems() as $orderItem) {
@@ -108,7 +101,7 @@ class CreateLabels extends Action
                         "description" => "",
                         "comment" => "",
                         "label_format" => $this->_helper->getAgreementConfig('cr_printformat', $order->getStoreId()),
-                        "servicepoint_id" => $closest->id ?? 0
+                        "servicepoint_id" => $droppointData->id ?? 0
                     ];
                 } elseif ($this->_helper->getAgreementConfig('cr_type', $order->getStoreId()) == 'pcn') {
                     $shipmentData = [
@@ -124,12 +117,12 @@ class CreateLabels extends Action
                         "receiver_email" => $orderShippingAddress->getEmail(),
                         "receiver_notify_sms" => $orderShippingAddress->getTelephone(),
                         "receiver_notify_email" => $orderShippingAddress->getEmail(),
-                        "droppoint_id" => $closest->id ?? 0,
-                        "droppoint_name" => $closest->name ?? "",
-                        "droppoint_street1" => $closest->address->street ?? "",
-                        "droppoint_zipcode" => $closest->address->zip_code ?? "",
-                        "droppoint_city" => $closest->address->city ?? "",
-                        "droppoint_country" => $closest->address->country_code ?? "",
+                        "droppoint_id" => $droppointData->id ?? 0,
+                        "droppoint_name" => $droppointData->name ?? "",
+                        "droppoint_street1" => $droppointData->address->street ?? "",
+                        "droppoint_zipcode" => $droppointData->address->zip_code ?? "",
+                        "droppoint_city" => $droppointData->address->city ?? "",
+                        "droppoint_country" => $droppointData->address->country_code ?? "",
                         "carrier" => $carrier,
                         "carrier_product" => $product,
                         "carrier_service" => $service ?? "",

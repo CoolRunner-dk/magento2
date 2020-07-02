@@ -107,9 +107,20 @@ class Coolrunner
         $curl = new Curl();
         $curl->setCredentials($this->username, $this->password);
         $curl->addHeader("X-Developer-Id", "Magento2-v1");
-        $curl->get('https://api.coolrunner.dk/v3/products/dk');
 
         $curlUrl = 'https://api.coolrunner.dk/v3/servicepoints/' . $carrier . '?country_code=' . $countryCode . '&street=' . str_replace(' ', '+', $street) . '&zip_code=' . $zipCode . '&city=' . $city;
+        $curl->get($curlUrl);
+
+        return json_decode($curl->getBody());
+    }
+
+    public function findDroppointById($carrier, $droppointId)
+    {
+        $curl = new Curl();
+        $curl->setCredentials($this->username, $this->password);
+        $curl->addHeader("X-Developer-Id", "Magento2-v1");
+
+        $curlUrl = 'https://api.coolrunner.dk/v3/servicepoints/' . $carrier . '/' . $droppointId;
         $curl->get($curlUrl);
 
         return json_decode($curl->getBody());

@@ -60,4 +60,10 @@ class Data extends AbstractHelper
         $coolRunner = $this->_objectManager->get('CoolRunner\Shipping\Controller\Adminhtml\Curl\CoolRunner');
         return $coolRunner->getNearestDroppoints($carrier, $countryCode, $street, $zipCode, $city);
     }
+
+    public function findDroppointById($carrier, $droppointId)
+    {
+        $coolRunner = $this->_objectManager->get('CoolRunner\Shipping\Controller\Adminhtml\Curl\CoolRunner');
+        return $coolRunner->findDroppointById($carrier, $droppointId);
+    }
 }
