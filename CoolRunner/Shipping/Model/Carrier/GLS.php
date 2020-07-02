@@ -192,7 +192,7 @@ class GLS extends AbstractCarrier implements CarrierInterface
                  */
 
                 $method->setMethod($this->getCarrierCode() . '-' . strtolower(str_replace(' ', '', $crMethod->method)));
-                $method->setMethodTitle($droppoint ?? $crMethod->methodname);
+                $method->setMethodTitle($crMethod->methodname);
                 $method->setPrice($shippingPrice);
                 $method->setCost($shippingPrice);
                 $result->append($method);
