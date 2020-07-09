@@ -2,6 +2,9 @@
 - Support for own stock or PCN (PakkecenterNord)
 - Magento 2 module for CoolRunner (Still under development)
 
+# Download
+Link: https://github.com/CoolRunner-dk/magento2/raw/master/CoolRunner.zip
+
 # Installation
 1. Upload to your magentoFolder/app/code
 2. Run bin/magento setup:upgrade
