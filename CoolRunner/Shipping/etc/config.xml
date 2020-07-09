@@ -11,41 +11,49 @@
                 <active>0</active>
                 <carrierimage>images/homerunner_grey.png</carrierimage>
                 <model>CoolRunner\Shipping\Model\Carrier\HomeRunner</model>
+                <amountdroppoint>3</amountdroppoint>
             </cr_homerunner>
             <cr_bring>
                 <active>0</active>
                 <carrierimage>images/bring.png</carrierimage>
                 <model>CoolRunner\Shipping\Model\Carrier\Bring</model>
+                <amountdroppoint>3</amountdroppoint>
             </cr_bring>
             <cr_coolrunner>
                 <active>0</active>
                 <carrierimage>images/coolrunner.png</carrierimage>
                 <model>CoolRunner\Shipping\Model\Carrier\CoolRunner</model>
+                <amountdroppoint>3</amountdroppoint>
             </cr_coolrunner>
             <cr_dao>
                 <active>0</active>
                 <carrierimage>images/dao.png</carrierimage>
                 <model>CoolRunner\Shipping\Model\Carrier\DAO</model>
+                <amountdroppoint>3</amountdroppoint>
             </cr_dao>
             <cr_dhl>
                 <active>0</active>
                 <carrierimage>images/dhl.png</carrierimage>
                 <model>CoolRunner\Shipping\Model\Carrier\DHL</model>
+                <amountdroppoint>3</amountdroppoint>
             </cr_dhl>
             <cr_gls>
                 <active>0</active>
                 <carrierimage>images/gls.png</carrierimage>
                 <model>CoolRunner\Shipping\Model\Carrier\GLS</model>
+                <amountdroppoint>3</amountdroppoint>
             </cr_gls>
             <cr_posti>
                 <active>0</active>
                 <carrierimage>images/posti.png</carrierimage>
                 <model>CoolRunner\Shipping\Model\Carrier\Posti</model>
+                <amountdroppoint>3</amountdroppoint>
             </cr_posti>
             <cr_postnord>
                 <active>0</active>
                 <carrierimage>images/postnord.png</carrierimage>
                 <model>CoolRunner\Shipping\Model\Carrier\Posti</model>
+                <amountdroppoint>3</amountdroppoint>
             </cr_postnord>
         </carriers>
     </default>

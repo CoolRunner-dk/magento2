@@ -153,49 +153,50 @@ class DHL extends AbstractCarrier implements CarrierInterface
                 }
             }
 
-            $explodedMethod = explode('_', strtolower(str_replace(' ', '', $crMethod->method)));
+            if ($crMethod->method != '' and $request->getDestCountryId() != '' and $request->getDestPostcode() != '') {
+                $explodedMethod = explode('_', strtolower(str_replace(' ', '', $crMethod->method)));
 
-            if (isset($explodedMethod) and $explodedMethod[2] == 'droppoint' or $explodedMethod[2] == 'servicepoint') {
-                $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-                $helper = $objectManager->create('CoolRunner\Shipping\Helper\Data');
-                $droppoints = $helper->findClosestDroppoints($explodedMethod[0], $request->getDestCountryId(), $request->getDestStreet()[0], $request->getDestPostcode(), $request->getDestCity());
-                $droppoint = json_encode($droppoints->servicepoints);
-                $shown = 0;
-                $maxShow = 3;
-                foreach ($droppoints->servicepoints as $servicepoint) {
-                    if ($shown >= $maxShow) {
-                        break;
+                if (isset($explodedMethod) and $explodedMethod[2] == 'droppoint' or $explodedMethod[2] == 'servicepoint') {
+                    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+                    $helper = $objectManager->create('CoolRunner\Shipping\Helper\Data');
+                    $droppoints = $helper->findClosestDroppoints($explodedMethod[0], $request->getDestCountryId(), $request->getDestStreet()[0], $request->getDestPostcode(), $request->getDestCity());
+                    $shown = 0;
+                    $maxShow = $this->getConfigData('amountdroppoint');
+                    foreach ($droppoints->servicepoints as $servicepoint) {
+                        if ($shown >= $maxShow) {
+                            break;
+                        }
+
+                        $method = $this->_rateMethodFactory->create();
+
+                        $method->setCarrier($this->getCarrierCode());
+                        $method->setCarrierTitle($this->_carrierTitle);
+
+                        $method->setMethod($this->getCarrierCode() . '-' . strtolower(str_replace(' ', '', $crMethod->method)) . '_' . $servicepoint->id);
+                        $method->setMethodTitle('Pakkeshop: ' . $servicepoint->name . ' (Afstand: ' . $servicepoint->distance . 'm)');
+                        $method->setPrice($shippingPrice);
+                        $method->setCost($shippingPrice);
+                        $result->append($method);
+
+                        $shown++;
                     }
-
+                } else {
                     $method = $this->_rateMethodFactory->create();
-
+                    /**
+                     * Set carrier's method data
+                     */
                     $method->setCarrier($this->getCarrierCode());
                     $method->setCarrierTitle($this->_carrierTitle);
+                    /**
+                     * Displayed as shipping method under Carrier
+                     */
 
-                    $method->setMethod($this->getCarrierCode() . '-' . strtolower(str_replace(' ', '', $crMethod->method)) . '_' . $servicepoint->id);
-                    $method->setMethodTitle('Pakkeshop: ' . $servicepoint->name . ' (Afstand: ' . $servicepoint->distance . 'm)');
+                    $method->setMethod($this->getCarrierCode() . '-' . strtolower(str_replace(' ', '', $crMethod->method)));
+                    $method->setMethodTitle($crMethod->methodname);
                     $method->setPrice($shippingPrice);
                     $method->setCost($shippingPrice);
                     $result->append($method);
-
-                    $shown++;
                 }
-            } else {
-                $method = $this->_rateMethodFactory->create();
-                /**
-                 * Set carrier's method data
-                 */
-                $method->setCarrier($this->getCarrierCode());
-                $method->setCarrierTitle($this->_carrierTitle);
-                /**
-                 * Displayed as shipping method under Carrier
-                 */
-
-                $method->setMethod($this->getCarrierCode() . '-' . strtolower(str_replace(' ', '', $crMethod->method)));
-                $method->setMethodTitle($crMethod->methodname);
-                $method->setPrice($shippingPrice);
-                $method->setCost($shippingPrice);
-                $result->append($method);
             }
         }
 
