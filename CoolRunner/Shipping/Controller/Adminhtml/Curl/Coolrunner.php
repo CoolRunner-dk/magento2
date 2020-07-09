@@ -106,7 +106,7 @@ class Coolrunner
     {
         $curl = new Curl();
         $curl->setCredentials($this->username, $this->password);
-        $curl->addHeader("X-Developer-Id", "Magento2-v1");
+        $curl->addHeader("X-Developer-Id", "Magento2-v2");
 
         $curlUrl = 'https://api.coolrunner.dk/v3/servicepoints/' . $carrier . '?country_code=' . $countryCode . '&street=' . str_replace(' ', '+', $street) . '&zip_code=' . $zipCode . '&city=' . $city;
         $curl->get($curlUrl);
@@ -118,7 +118,7 @@ class Coolrunner
     {
         $curl = new Curl();
         $curl->setCredentials($this->username, $this->password);
-        $curl->addHeader("X-Developer-Id", "Magento2-v1");
+        $curl->addHeader("X-Developer-Id", "Magento2-v2");
 
         $curlUrl = 'https://api.coolrunner.dk/v3/servicepoints/' . $carrier . '/' . $droppointId;
         $curl->get($curlUrl);
@@ -131,7 +131,7 @@ class Coolrunner
         try {
             $curl = new Curl();
             $curl->setCredentials($this->username, $this->password);
-            $curl->addHeader("X-Developer-Id", "Magento2-v1");
+            $curl->addHeader("X-Developer-Id", "Magento2-v2");
 
             $resource = $this->_objectManager->get('Magento\Framework\App\ResourceConnection');
             $connection = $resource->getConnection();
@@ -230,7 +230,7 @@ class Coolrunner
         // Get shipping labels from DB in table called coolrunner_shipping_labels
         $curl = new Curl();
         $curl->setCredentials($this->username, $this->password);
-        $curl->addHeader("X-Developer-Id", "Magento2-v1");
+        $curl->addHeader("X-Developer-Id", "Magento2-v2");
 
         $resource = $this->_objectManager->get('Magento\Framework\App\ResourceConnection');
         $connection = $resource->getConnection();

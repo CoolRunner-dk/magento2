@@ -154,27 +154,33 @@ class Posti extends AbstractCarrier implements CarrierInterface
                 }
             }
 
-            if ($crMethod->method != '' and $request->getDestCountryId() != '' and $request->getDestPostcode() != '') {
+            if ($crMethod->method != '') {
                 $explodedMethod = explode('_', strtolower(str_replace(' ', '', $crMethod->method)));
-
-                if (isset($explodedMethod) and $explodedMethod[2] == 'droppoint' or $explodedMethod[2] == 'servicepoint') {
+                if (isset($explodedMethod[0]) and $explodedMethod[2] == 'droppoint' or $explodedMethod[2] == 'servicepoint') {
                     $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
                     $helper = $objectManager->create('CoolRunner\Shipping\Helper\Data');
-                    $droppoints = $helper->findClosestDroppoints($explodedMethod[0], $request->getDestCountryId(), $request->getDestStreet()[0], $request->getDestPostcode(), $request->getDestCity());
+
+                    // Select address
+                    if (is_array($request->getDestStreet())) {
+                        $street = $request->getDestStreet()[0];
+                    } else {
+                        $street = $request->getDestStreet();
+                    }
+
+                    $droppoints = $helper->findClosestDroppoints($explodedMethod[0], $request->getDestCountryId(), $street, $request->getDestPostcode(), $request->getDestCity());
                     $shown = 0;
-                    $maxShow = $this->getConfigData('amountdroppoint');
                     foreach ($droppoints->servicepoints as $servicepoint) {
-                        if ($shown >= $maxShow) {
+                        if ($shown >= $this->getConfigData('amountdroppoint')) {
                             break;
                         }
 
                         $method = $this->_rateMethodFactory->create();
 
                         $method->setCarrier($this->getCarrierCode());
-                        $method->setCarrierTitle($this->_carrierTitle);
+                        $method->setCarrierTitle($this->_carrierTitle  . ' (Afstand: ' . $servicepoint->distance . 'm)');
 
                         $method->setMethod($this->getCarrierCode() . '-' . strtolower(str_replace(' ', '', $crMethod->method)) . '_' . $servicepoint->id);
-                        $method->setMethodTitle('Pakkeshop: ' . $servicepoint->name . ' (Afstand: ' . $servicepoint->distance . 'm)');
+                        $method->setMethodTitle('Pakkeshop: ' . $servicepoint->name);
                         $method->setPrice($shippingPrice);
                         $method->setCost($shippingPrice);
                         $result->append($method);
