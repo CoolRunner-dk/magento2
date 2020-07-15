@@ -74,7 +74,7 @@ class PrintLabels extends Action
 
             // Shows the merged label
             header('Content-type: application/pdf');
-            echo $pdfMerged->render();
+            print_r($pdfMerged->render());
         } catch (\Exception $e) {
             $this->messageManager->addErrorMessage($e->getMessage());
             $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);

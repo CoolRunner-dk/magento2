@@ -53,20 +53,25 @@ class MethodColumn extends Select
         // Get name for carrier by replacing rubbish
         $nameExploded = explode('[', str_replace(['groups', ']', 'cr_', '[<%- _id %>[method'], '', $this->getName()));
 
+        $carrier = $nameExploded[1];
+
         // Return carrier to source options
-        $this->setOptions($this->getSourceOptions($nameExploded[1]));
+        $this->setOptions($this->getSourceOptions($carrier));
 
         return parent::_toHtml();
     }
 
     private function getSourceOptions($carrier)
     {
+        $this->_logger->debug($carrier);
         // Instantiate CoolRunner model
         $storeId = $this->_storeManager->getStore()->getId();
         $crCurl = new Coolrunner($storeId);
 
         // Get products by carrier and authentication
         $products = $crCurl->getProductsByCarrier($carrier);
+
+        $this->_logger->debug(json_encode($products));
 
         // Instantiate ararys and handle data for array structure
         $optionArray = [];
@@ -80,5 +85,6 @@ class MethodColumn extends Select
         }
 
         return $optionArray;
+
     }
 }

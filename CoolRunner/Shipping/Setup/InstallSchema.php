@@ -31,11 +31,25 @@ class InstallSchema implements InstallSchemaInterface
                     'ID'
                 )
                 ->addColumn(
+                    'country',
+                    Table::TYPE_TEXT,
+                    255,
+                    ['nullable' => false, 'default' => ''],
+                    'Country'
+                )
+                ->addColumn(
                     'carrier',
                     Table::TYPE_TEXT,
                     255,
                     ['nullable' => false, 'default' => ''],
                     'Carrier'
+                )
+                ->addColumn(
+                    'type',
+                    Table::TYPE_TEXT,
+                    255,
+                    ['nullable' => false, 'default' => ''],
+                    'Type'
                 )
                 ->addColumn(
                     'products',

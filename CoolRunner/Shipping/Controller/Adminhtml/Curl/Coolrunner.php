@@ -35,7 +35,7 @@ class Coolrunner
         // Do nothing
     }
 
-    private function addProducts($carrier, $products)
+    private function addProducts($carrier, $country, $type, $products)
     {
         if (!empty($products)) {
             // Add products to DB in table called coolrunner_products
@@ -43,7 +43,7 @@ class Coolrunner
             $connection = $resource->getConnection();
             $tableName = $resource->getTableName('coolrunner_products');
 
-            $sql = "INSERT INTO " . $tableName . " (carrier, products) Values ('{$carrier}', '{$products}')";
+            $sql = "INSERT INTO " . $tableName . " (carrier, country, type, products) Values ('{$carrier}', '{$country}', '{$type}', '{$products}')";
             $connection->query($sql);
         }
     }
@@ -70,31 +70,39 @@ class Coolrunner
                 $curl->get('https://api.coolrunner.dk/v3/products/dk');
                 $this->products = json_decode($curl->getBody());
 
-                if (isset($this->products->DK->$carrier)) {
-                    $this->products = json_encode($this->products->DK->$carrier);
-                    $this->addProducts($carrier, $this->products);
-                } else {
-                    $this->addProducts($carrier, json_encode([]));
+                foreach ($this->products as $country => $products) {
+                    foreach ($products as $productCarrier => $productTypes) {
+                        foreach ($productTypes as $type => $productData) {
+                            if (isset($productData) and $productCarrier == $carrier) {
+                                $this->products = json_encode($productData);
+                                $this->addProducts($productCarrier, $country, $type, $this->products);
+                            } else {
+                                $this->addProducts($carrier, $country, $type, json_encode([]));
+                            }
+                        }
+                    }
                 }
             }
         }
 
-        $this->products = json_decode($this->getProducts($carrier)[0]['products']);
+        $this->products = $this->getProducts($carrier);
         $formattedProducts = [];
+        $alreadyAdded = [];
 
-        foreach ($this->products as $productType => $services) {
-            foreach ($services as $service) {
-                if (strtolower($productType) != 'dummy') {
-                    if (strtoupper($service->services[0]->code) != '') {
-                        $label = '_' . strtoupper($service->services[0]->code);
-                    } else {
-                        $label = '';
-                    }
+        foreach ($this->products as $product) {
+            $carrier = $product['carrier'];
+            $carrier_product = $product['type'];
 
+            foreach (json_decode($product['products']) as $singleProduct) {
+                $carrier_service = $singleProduct->services[0]->code ?: '';
+
+                if (!in_array(strtoupper($carrier) . '_' . strtoupper($carrier_product) . '_' . strtoupper($carrier_service), $alreadyAdded)) {
                     $formattedProducts[] = [
-                        'value' => strtoupper($carrier) . '_' . strtoupper($productType) . $label,
-                        'label' => strtoupper($carrier) . '_' . strtoupper($productType) . $label
+                        'value' => strtoupper($carrier) . '_' . strtoupper($carrier_product) . '_' . strtoupper($carrier_service),
+                        'label' => strtoupper($carrier) . '_' . strtoupper($carrier_product) . '_' . strtoupper($carrier_service),
                     ];
+
+                    $alreadyAdded[] = strtoupper($carrier) . '_' . strtoupper($carrier_product) . '_' . strtoupper($carrier_service);
                 }
             }
         }
