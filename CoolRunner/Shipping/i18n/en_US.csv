@@ -1,0 +1,50 @@
+Metodekode,Method Code
+Metodenavn,Method Name
+Pris,Price
+"Tilføj forsendelsesmetode","Add shipping method"
+Betingelse,Condition
+Fra,From
+Til,To
+"Tilføj prisregel","Add price rule"
+"Generelle indstillinger","General"
+"Aktiver CoolRunner","Enabled"
+"Efter opsætning af CoolRunner indstillingerne kan du tilgå Salg > Forsendelsesmetoder og opsætte de forskellige metoder her.","After setting up the CoolRunner settings, you can access Sales -> Shipping Methods and set up the different methods here."
+Brugernavn,Username
+"Indtast dit brugernavn fra CoolRunner.dk > Integration > Webservice","Enter your username from CoolRunner.dk -> Integration -> Web service"
+"Indtast dit token fra CoolRunner.dk > Integration > Webservice","Enter your token from CoolRunner.dk -> Integration -> Web service"
+Aftaleindstillinger,Agreement Settings
+Lagerhåndtering,Warehouse handling
+"Vælge din lageropsætning (Eget lager eller PCN)","Selecting Your Inventory Setup (Own Inventory or PCN)"
+Printformat,Print Format
+"Vælge størrelsen på dit printformat.","Select the size of your print format."
+"Opret ""Shipment"" ved ny label","Create ""Shipment"" with new label"
+"Efter oprettelse af ny ordre kan du vælge om magento skal oprette en ny shipment for ordren","After creating a new order, you can choose whether magento will create a new shipment for the order"
+Aktiver,Enabled
+"Vælge om leverandøren skal være aktiv","Choose whether the supplier should be active"
+Metoder,Methods
+"Opsæt leverandørens forskellige metoder herunder. For, at finde din pris hos CoolRunner gøres dette ved, at tilgå CoolRunner.dk og her logger du ind og tilgår menupunktet ""Priser"".","Set up the vendor's different methods below. To find your price at CoolRunner this is done by going to CoolRunner.dk and here you log in and access the menu item ""Prices""."
+Prisregler,Price Rules
+"Opsæt forskellige prisregler ud fra vægt, pris, postnummer mm.","Set different price rules based on weight, price, zip code etc."
+"Antal pakkeshops","Number of parcel shops"
+Ordrenummer,Order Id
+Pakkenummer,Package number
+Produkt,Product
+Oprettet,Created At
+Pakkelabels,Package Labels
+Indstillinger,Settings
+"Antal af pakkeshops der skal vises for dette fragtsels (maks 10 styks)","Number of parcel shops to be displayed for this freight (max 10 items)"
+Eget lager,Own stock
+PakkecenterNORD,PackageCenterNORD
+Vægt (g),Weight (g)
+Postnurmmer,Postcode
+Vareantal,Qty
+"Gå til CoolRunner.dk","Go to CoolRunner.dk"
+Pakkenummer,Packege number
+Tidspunkt,Created At
+"Pris eksl. moms","Price ex. tax"
+"Pris inkl. moms","Price inc. tax"
+"Track denne forsendelse","Track this shipment"
+"Gennemført oprettelse af label på de valgte ordre.","Completed label creation on the selected orders."
+"Pakkeshop: %1 (Afstand: %2m)","ParcelShop:% 1 (Distance:% 2m)"
+"Order #%1. %2","Ordre #%1. %2"
+"There are no Package Labels.","Der er ingen Pakkelabels."

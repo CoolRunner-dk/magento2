@@ -1,0 +1,49 @@
+// /**
+//  *  _module of CoolRunner_Shipping
+//  *
+//  * @copyright Copyright © 2020 HeadWayIt https://headwayit.com/ All rights reserved.
+//  * @author  Ilya Kushnir  ilya.kush@gmail.com
+//  */
+
+& when (@media-common = true) {
+    .coolrunner-droppoints-list {
+        border: solid 2px @border-color__base;
+        padding: @indent__base;
+        margin: @indent__s 0;
+        box-sizing: border-box;
+    }
+
+    .coolrunner-droppoints-modal.modal-popup.modal-slide {
+        .modal-footer {
+            .droppoint-info {
+                float: left;
+                text-align: left;
+
+                p {
+                    margin-bottom: 3px;
+                }
+
+                ul {
+                    list-style-type: none;
+                    padding-left: 0;
+                    margin-bottom: 0;
+                    li {
+                        margin-bottom: 3px;
+                        display: inline-block;
+                        margin-right: 10px;
+                        span.day {
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .coolrunner-droppoints-list {
+        max-width: 500px;
+    }
+}
+

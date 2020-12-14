@@ -1,60 +1,90 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * config
+ *
+ * @copyright Copyright © 2020 HeadWayIt https://headwayit.com/ All rights reserved.
+ * @author  Ilya Kushnir  ilya.kush@gmail.com
+ */
+-->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
         <cr_settings>
             <activation>
                 <enable>0</enable>
             </activation>
+            <droppoints>
+                <enable_map>1</enable_map>
+            </droppoints>
+            <package>
+                <length>15</length>
+                <width>15</width>
+                <height>6</height>
+                <weight_units>KILOGRAM</weight_units>
+                <dimension_units>CENTIMETER</dimension_units>
+            </package>
+            <carriers>
+                <methods>business,private,return</methods>
+                <services>delivery,droppoint,business,return</services>
+            </carriers>
         </cr_settings>
         <carriers>
-            <cr_homerunner>
+            <coolrunnerhomerunner>
                 <active>0</active>
+                <title>HomeRunner</title>
+                <max_package_weight>100000</max_package_weight>
                 <carrierimage>images/homerunner_grey.png</carrierimage>
                 <model>CoolRunner\Shipping\Model\Carrier\HomeRunner</model>
-                <amountdroppoint>3</amountdroppoint>
-            </cr_homerunner>
-            <cr_bring>
+            </coolrunnerhomerunner>
+            <coolrunnerbring>
                 <active>0</active>
+                <title>Bring</title>
+                <max_package_weight>100000</max_package_weight>
                 <carrierimage>images/bring.png</carrierimage>
                 <model>CoolRunner\Shipping\Model\Carrier\Bring</model>
-                <amountdroppoint>3</amountdroppoint>
-            </cr_bring>
-            <cr_coolrunner>
+            </coolrunnerbring>
+            <coolrunnercoolrunner>
                 <active>0</active>
+                <title>CoolRunner</title>
+                <max_package_weight>100000</max_package_weight>
                 <carrierimage>images/coolrunner.png</carrierimage>
                 <model>CoolRunner\Shipping\Model\Carrier\CoolRunner</model>
-                <amountdroppoint>3</amountdroppoint>
-            </cr_coolrunner>
-            <cr_dao>
+            </coolrunnercoolrunner>
+            <coolrunnerdao>
                 <active>0</active>
+                <title>DAO</title>
+                <max_package_weight>100000</max_package_weight>
                 <carrierimage>images/dao.png</carrierimage>
                 <model>CoolRunner\Shipping\Model\Carrier\DAO</model>
-                <amountdroppoint>3</amountdroppoint>
-            </cr_dao>
-            <cr_dhl>
+            </coolrunnerdao>
+            <coolrunnerdhl>
                 <active>0</active>
+                <title>DHL</title>
+                <max_package_weight>100000</max_package_weight>
                 <carrierimage>images/dhl.png</carrierimage>
                 <model>CoolRunner\Shipping\Model\Carrier\DHL</model>
-                <amountdroppoint>3</amountdroppoint>
-            </cr_dhl>
-            <cr_gls>
+            </coolrunnerdhl>
+            <coolrunnergls>
                 <active>0</active>
+                <title>GLS</title>
+                <max_package_weight>100000</max_package_weight>
                 <carrierimage>images/gls.png</carrierimage>
                 <model>CoolRunner\Shipping\Model\Carrier\GLS</model>
-                <amountdroppoint>3</amountdroppoint>
-            </cr_gls>
-            <cr_posti>
+            </coolrunnergls>
+            <coolrunnerposti>
                 <active>0</active>
+                <title>Posti</title>
+                <max_package_weight>100000</max_package_weight>
                 <carrierimage>images/posti.png</carrierimage>
                 <model>CoolRunner\Shipping\Model\Carrier\Posti</model>
-                <amountdroppoint>3</amountdroppoint>
-            </cr_posti>
-            <cr_postnord>
+            </coolrunnerposti>
+            <coolrunnerpostnord>
                 <active>0</active>
+                <title>PostNord</title>
+                <max_package_weight>100000</max_package_weight>
                 <carrierimage>images/postnord.png</carrierimage>
-                <model>CoolRunner\Shipping\Model\Carrier\Posti</model>
-                <amountdroppoint>3</amountdroppoint>
-            </cr_postnord>
+                <model>CoolRunner\Shipping\Model\Carrier\PostNord</model>
+            </coolrunnerpostnord>
         </carriers>
     </default>
 </config>

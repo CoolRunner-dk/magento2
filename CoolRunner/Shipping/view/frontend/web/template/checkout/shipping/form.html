@@ -1,0 +1,28 @@
+<div id="coolrunner-droppoints-list-wrapper" class="" data-bind="visible: isShippingMethodDroppoint()">
+    <div class="coolrunner-droppoints-list">
+        <h3>
+            <span data-bind="i18n: 'Select ParcelShop.'"></span>
+        </h3>
+        <p class="field-error" data-bind="visible: !showDroppointSelection(), i18n: 'Please provide correct country, city, postcode and street to see nearest ParcelShop'"></p>
+        <div class="fieldset" data-bind="visible: showDroppointSelection()">
+            <div class="field">
+                <select id="coolrunner-droppoints" data-bind="
+                                            options: droppoints(),
+                                            value: selectedDroppoint,
+                                            optionsValue: 'id',
+                                            optionsText: function(item){return item.location;}">
+                </select>
+            </div>
+            <div class="actions-toolbar" data-bind="visible: showDroppointsMap()" >
+                <div class="primary">
+                    <button class="button action coolrunner-droppoints-showmap" data-bind="click: showOnMap" >
+                        <span data-bind="i18n: 'Show on map'" />
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="coolrunner-droppoints-popup-map">
+    <div id="coolrunner-droppoints-map"></div>
+</div>

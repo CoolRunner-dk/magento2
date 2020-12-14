@@ -1,37 +1,36 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ *  sales_order_grid
+ *
+ * @copyright Copyright © 2020 HeadWayIt https://headwayit.com/ All rights reserved.
+ * @author  Ilya Kushnir  ilya.kush@gmail.com
+ */
+-->
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
-    <!-- adds actions on single orders -->
-    <columns name="sales_order_columns">
-        <actionsColumn name="actions" class="CoolRunner\Shipping\Ui\Component\Listing\Column\ViewAction">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="indexField" xsi:type="string">entity_id</item>
-                    <item name="viewUrlPath" xsi:type="string">sales/order/view</item>
-                    <item name="urlEntityParamName" xsi:type="string">order_id</item>
-                </item>
-            </argument>
-        </actionsColumn>
-    </columns>
-
-    <!-- adds massactions -->
     <listingToolbar name="listing_top">
         <massaction name="listing_massaction">
+            <action name="cr_invoiceCreatePrintLabels">
+                <settings>
+                    <url path="coolrunner_shipping/order/massInvoiceCreatePrintLabels" />
+                    <type>coolrunner_invoice_create_print_labels</type>
+                    <label translate="true">CoolRunner: Invoice + Create and Print labels</label>
+                </settings>
+            </action>
             <action name="cr_createLabels">
                 <settings>
-                    <url path="coolrunner_shipping/order/createLabels" />
+                    <url path="coolrunner_shipping/order/massCreateLabels" />
                     <type>coolrunner_createlabels</type>
                     <label translate="true">CoolRunner: Create labels</label>
                 </settings>
             </action>
             <action name="cr_printLabels">
                 <settings>
-                    <url path="coolrunner_shipping/order/printLabels" />
+                    <url path="coolrunner_shipping/order/massPrintLabels" />
                     <type>coolrunner_printlabels</type>
                     <label translate="true">CoolRunner: Print labels</label>
                 </settings>
             </action>
         </massaction>
     </listingToolbar>
-
-
 </listing>

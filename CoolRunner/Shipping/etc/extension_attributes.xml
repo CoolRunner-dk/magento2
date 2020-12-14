@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ *  extension_attributes
+ *
+ * @copyright Copyright © 2020 HeadWayIt https://headwayit.com/ All rights reserved.
+ * @author  Ilya Kushnir  ilya.kush@gmail.com
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
+    <extension_attributes for="Magento\Quote\Api\Data\AddressInterface">
+        <attribute code="shipping_coolrunner_pickup_id" type="int"/>
+    </extension_attributes>
+</config>

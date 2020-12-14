@@ -1,8 +1,16 @@
-<?xml version="1.0"?>
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ *  sales_order_view
+ *
+ * @copyright Copyright © 2020 HeadWayIt https://headwayit.com/ All rights reserved.
+ * @author  Ilya Kushnir  ilya.kush@gmail.com
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
-        <referenceBlock name="order_additional_info">
-            <block class="CoolRunner\Shipping\Block\Adminhtml\Order\View\CustomOrderView" name="sales_order_view_custom" template="order/view/custom.phtml" />
-        </referenceBlock>
+        <referenceContainer name="order_additional_info">
+            <block class="CoolRunner\Shipping\Block\Adminhtml\Order\View\Info" name="order_additional_info.coolrunner" template="CoolRunner_Shipping::order/view/info.phtml" />
+        </referenceContainer>
     </body>
 </page>

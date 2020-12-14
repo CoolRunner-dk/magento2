@@ -1,0 +1,81 @@
+<?php
+/**
+ *  info
+ *
+ * @copyright Copyright © 2020 HeadWayIt https://headwayit.com/ All rights reserved.
+ * @author  Ilya Kushnir  ilya.kush@gmail.com
+ * Date:    06.08.2020
+ * Time:    15:01
+ */
+/**
+ * @var CoolRunner\Shipping\Block\Adminhtml\Order\View\Info $block
+ * @var \Magento\Framework\View\TemplateEngine\Php $this
+ */
+?>
+<?php
+$shippingLabels        = $block->getOrderLabels();
+$shippingMethodDetails = $block->getShippingMethodDetails();
+?>
+<section class="admin__page-section coolrunner-main">
+    <div class="admin__page-section-title coolrunner">
+        <a target="_blank" href="http://coolrunner.dk/">
+            <span class="title"><img src="https://i.imgur.com/3Se87df.png" alt="<?= __('CoolRunner logo')?>" title="<?= __("CoolRunner.dk") ?>"></span>
+        </a>
+        <div class="om-top-actions"><a target="_blank" href="https://coolrunner.dk/customer/account/login/"><?= __('Gå til CoolRunner.dk') ?></a></div>
+    </div>
+    <div class="admin__table-wrapper">
+        <table class="data-table admin__table-primary">
+            <thead>
+                <tr class="headings">
+                    <th>
+                        <span><?= __('Pakkenummer') ?></span>
+                    </th>
+                    <th>
+                        <span><?= __('Tidspunkt') ?></span>
+                    </th>
+                    <th>
+                        <span><?= __('Pris eksl. moms') ?></span>
+                    </th>
+                    <th>
+                        <span><?= __('Pris inkl. moms') ?></span>
+                    </th>
+                    <th>
+                        <span><?= __('Action') ?></span>
+                    </th>
+                </tr>
+            </thead>
+            <?php /** @var \CoolRunner\Shipping\Model\Labels $_label */
+            foreach ($shippingLabels as $_label): ?>
+                <tbody>
+                    <tr>
+                        <td><?= $_label->getPackageNumber() ?></td>
+                        <td><?= $_label->getCreatedAt() ?></td>
+                        <td><?= $block->displayPrices($_label->getPriceExclTax(),$_label->getPriceExclTax()) ?></td>
+                        <td><?= $block->displayPrices($_label->getPriceInclTax(),$_label->getPriceInclTax()) ?></td>
+                        <td>
+                            <a target="_blank" href="<?= $block->getTrackingUrl($_label->getPackageNumber())?>"><?= __('Track denne forsendelse') ?></a>
+                        </td>
+                    </tr>
+                </tbody>
+            <?php endforeach; ?>
+            <tfoot>
+                <tr>
+                    <th><?= __('Details') ?>:</th>
+                    <td colspan="4" style="text-transform: capitalize"><?= $shippingMethodDetails['carrier']; ?>
+                        <?= $shippingMethodDetails['service']; ?>
+                        <?= $shippingMethodDetails['product']; ?>
+                    </td>
+                </tr>
+                <?php if ($block->isDropppoint()): /** now cache is here.  let's disable it to avoid a lot of curl request. first need to implement caching of droppoints */ ?>
+                    <tr>
+                        <th><?= __('ParcelShop') ?>:</th>
+                        <td colspan="4">
+                            <?= $block->getDroppoint()->getLocation() ?>
+                        </td>
+                    </tr>
+                <?php endif; ?>
+            </tfoot>
+        </table>
+    </div>
+</section>
+

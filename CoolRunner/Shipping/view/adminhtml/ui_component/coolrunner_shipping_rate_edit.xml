@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ *  coolrunner_shipping_rate_edit
+ *
+ * @copyright Copyright © 2020 HeadWayIt https://headwayit.com/ All rights reserved.
+ * @author  Ilya Kushnir  ilya.kush@gmail.com
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">coolrunner_shipping_rate_edit.rate_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Information</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save" class="CoolRunner\Shipping\Block\Adminhtml\Rate\Edit\SaveButton"/>
+            <button name="delete" class="CoolRunner\Shipping\Block\Adminhtml\Rate\Edit\DeleteButton"/>
+            <button name="back" class="CoolRunner\Shipping\Block\Adminhtml\Rate\Edit\BackButton"/>
+        </buttons>
+        <namespace>coolrunner_shipping_rate_edit</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>coolrunner_shipping_rate_edit.rate_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="rate_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="coolrunner_shipping/rate/save"/>
+        </settings>
+        <dataProvider class="CoolRunner\Shipping\Model\Rate\DataProvider" name="rate_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <settings>
+            <label/>
+        </settings>
+        <field name="entity_id" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>entity_id</dataScope>
+            </settings>
+        </field>
+        <field name="is_active" sortOrder="1" formElement="checkbox">
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Status</label>
+                <dataScope>is_active</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="title" sortOrder="3" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">rate</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Title</label>
+                <dataScope>title</dataScope>
+            </settings>
+        </field>
+        <field name="carrier" sortOrder="4" formElement="select">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Carrier</label>
+                <dataScope>carrier</dataScope>
+                <disabled>true</disabled>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="CoolRunner\Shipping\Model\Rate\Source\Carrier"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="method" sortOrder="5" formElement="select">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Method</label>
+                <dataScope>method</dataScope>
+                <disabled>true</disabled>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="CoolRunner\Shipping\Model\Rate\Source\Method"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="service" sortOrder="6" formElement="select">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Service</label>
+                <dataScope>service</dataScope>
+                <disabled>true</disabled>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="CoolRunner\Shipping\Model\Rate\Source\Service"/>
+                        <caption translate="true">--</caption>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="dest_country_id" sortOrder="7" formElement="select" component="Magento_Ui/js/form/element/country">
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Country</label>
+                <dataScope>dest_country_id</dataScope>
+                <disabled>true</disabled>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Magento\Directory\Model\ResourceModel\Country\Collection"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="dest_region_id" sortOrder="8" formElement="select" component="Magento_Ui/js/form/element/region">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="customEntry" xsi:type="string">region</item>
+                    <item name="filterBy" xsi:type="array">
+                        <item name="target" xsi:type="string">${ $.provider }:${ $.parentScope }.dest_country_id</item>
+                        <item name="field" xsi:type="string">dest_country_id</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Region</label>
+                <dataScope>dest_region_id</dataScope>
+                <disabled>true</disabled>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Magento\Directory\Model\ResourceModel\Region\Collection"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="dest_zip" sortOrder="9" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Postcode</label>
+                <dataScope>dest_zip</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="cost" sortOrder="18" formElement="input">
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="validate-zero-or-greater" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Cost</label>
+                <dataScope>cost</dataScope>
+<!--                <disabled>true</disabled>-->
+            </settings>
+        </field>
+        <field name="price" sortOrder="19" formElement="input">
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="validate-zero-or-greater" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Price</label>
+                <dataScope>price</dataScope>
+            </settings>
+        </field>
+        <field name="condition_name" sortOrder="20" formElement="select">
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Condition</label>
+                <dataScope>condition_name</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="CoolRunner\Shipping\Model\Rate\Source\Condition"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="condition_from" sortOrder="21" formElement="input">
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                    <rule name="validate-zero-or-greater" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Condition From</label>
+                <dataScope>condition_from</dataScope>
+            </settings>
+        </field>
+        <field name="condition_to" sortOrder="22" formElement="input">
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                    <rule name="validate-zero-or-greater" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Condition To</label>
+                <dataScope>condition_to</dataScope>
+            </settings>
+        </field>
+        <field name="second_condition_name" sortOrder="23" formElement="select">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">2nd Condition</label>
+                <dataScope>second_condition_name</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="CoolRunner\Shipping\Model\Rate\Source\SecondCondition"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="second_condition_from" sortOrder="24" formElement="input">
+            <settings>
+                <validation>
+<!--                    <rule name="required-entry" xsi:type="boolean">true</rule>-->
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                    <rule name="validate-zero-or-greater" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">2nd Condition From</label>
+                <dataScope>second_condition_from</dataScope>
+            </settings>
+        </field>
+        <field name="second_condition_to" sortOrder="25" formElement="input">
+            <settings>
+                <validation>
+<!--                    <rule name="required-entry" xsi:type="boolean">true</rule>-->
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                    <rule name="validate-zero-or-greater" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">2nd Condition To</label>
+                <dataScope>second_condition_to</dataScope>
+            </settings>
+        </field>
+        <field name="store_id" sortOrder="29" formElement="multiselect" class="Magento\Store\Ui\Component\Form\Field\StoreView">
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>int</dataType>
+                <tooltip>
+                    <link>https://docs.magento.com/m2/ce/user_guide/configuration/scope.html</link>
+                    <description>What is this?</description>
+                </tooltip>
+                <label translate="true">Store View</label>
+                <dataScope>store_id</dataScope>
+            </settings>
+            <formElements>
+                <multiselect>
+                    <settings>
+                        <options class="CoolRunner\Shipping\Model\Rate\Source\Stores"/>
+                    </settings>
+                </multiselect>
+            </formElements>
+        </field>
+        <field name="sort_order" sortOrder="30" formElement="input">
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="validate-zero-or-greater" xsi:type="boolean">true</rule>
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Sort Order</label>
+                <dataScope>sort_order</dataScope>
+            </settings>
+        </field>
+    </fieldset>
+    <fieldset name="info">
+        <settings>
+            <label>Information</label>
+        </settings>
+        <field name="max_width" sortOrder="10" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Max Width</label>
+                <dataScope>max_width</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="max_height" sortOrder="11" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Max Height</label>
+                <dataScope>max_height</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+        <field name="max_length" sortOrder="12" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Max Length</label>
+                <dataScope>max_length</dataScope>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+    </fieldset>
+</form>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ *  db_shema
+ *
+ * @copyright Copyright © 2020 HeadWayIt https://headwayit.com/ All rights reserved.
+ * @author  Ilya Kushnir  ilya.kush@gmail.com
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="coolrunner_shipping_rates" resource="default" engine="innodb">
+        <column xsi:type="int"     name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Rate ID"/>
+        <column xsi:type="smallint" name="is_active" padding="6" unsigned="false" nullable="false" identity="false" default="0" comment="Is Rate Active"/>
+        <column xsi:type="varchar" name="title" nullable="false" length="100" comment="Title"/>
+        <column xsi:type="varchar" name="carrier" nullable="false" length="60" comment="Carrier Code"/>
+        <column xsi:type="varchar" name="method" nullable="false" length="60" comment="Carrier Method"/>
+        <column xsi:type="varchar" name="service" nullable="true" length="60" comment="Carrier Service"/>
+        <column xsi:type="varchar" name="store_id" nullable="false" length="50" default="0" comment="Store Ids concatenated string"/>
+        <column xsi:type="varchar" name="dest_country_id" nullable="false" length="4" default="" comment="Destination coutry ISO/2 or ISO/3 code"/>
+        <column xsi:type="int"     name="dest_region_id" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Destination Region ID"/>
+        <column xsi:type="varchar" name="dest_zip" nullable="false" length="10" default="*" comment="Destination Post Code (Zip)"/>
+        <column xsi:type="varchar" name="condition_name" nullable="false" length="30" comment="Second Condition Name" />
+        <column xsi:type="decimal"   name="condition_from" nullable="false" default='0' scale="4" precision="12" comment="Second Condition From Value" />
+        <column xsi:type="decimal"   name="condition_to" nullable="false" default='0' scale="4" precision="12" comment="Second Condition To Value" />
+        <column xsi:type="varchar" name="second_condition_name" nullable="false" length="30" comment="Second Condition Name" />
+        <column xsi:type="decimal"   name="second_condition_from" nullable="true" scale="4" precision="12" comment="Second Condition From Value" />
+        <column xsi:type="decimal"   name="second_condition_to" nullable="true" scale="4" precision="12" comment="Second Condition To Value" />
+        <column xsi:type="decimal" name="price" scale="4" precision="20" unsigned="false" nullable="true" comment="Price"/>
+        <column xsi:type="decimal" name="cost" scale="4" precision="20" unsigned="false" nullable="true" comment="Cost"/>
+        <column xsi:type="smallint" name="sort_order" padding="6" unsigned="false" nullable="false" identity="false" default="0" comment="Rate Sort Order"/>
+        <column xsi:type="smallint" name="is_autoloaded" padding="6" unsigned="false" nullable="false" identity="false" default="1" comment="Flag Is Autoloaded from server"/>
+        <column xsi:type="decimal"   name="max_width" nullable="true" scale="4" precision="12" comment="Max Width of Package" />
+        <column xsi:type="decimal"   name="max_height" nullable="true" scale="4" precision="12" comment="Max Height of Package" />
+        <column xsi:type="decimal"   name="max_length" nullable="true" scale="4" precision="12" comment="Max Length of Package" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <index referenceId="COOLRUNNER_SHIPPING_RATES_CARRIER" indexType="btree">
+            <column name="carrier"/>
+        </index>
+        <index referenceId="COOLRUNNER_SHIPPING_RATES_IS_ACTIVE" indexType="btree">
+            <column name="is_active"/>
+        </index>
+        <index referenceId="COOLRUNNER_SHIPPING_RATES_IS_AUTOLOADED" indexType="btree">
+            <column name="is_autoloaded"/>
+        </index>
+    </table>
+
+    <table name="coolrunner_shipping_labels" resource="default" engine="innodb" comment="CoolRunner package label">
+        <column xsi:type="int" name="post_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Label ID"/>
+        <column xsi:type="int" name="order_id" padding="10" unsigned="true" nullable="false" identity="false" comment="Order ID"/>
+        <column xsi:type="varchar" name="order_increment_id" nullable="true" length="32" comment="Order Increment ID"/>
+        <column xsi:type="varchar" name="package_number" nullable="false" length="100" comment="Tracking number"/>
+        <column xsi:type="varchar" name="unique_id" nullable="true" length="125" comment="Unique id of PCN label"/>
+        <column xsi:type="decimal" name="price_incl_tax" scale="4" precision="20" unsigned="false" nullable="true" comment="Shipping Incl Tax"/>
+        <column xsi:type="decimal" name="price_excl_tax" scale="4" precision="20" unsigned="false" nullable="true" comment="Shipping Excl Tax"/>
+        <column xsi:type="varchar" name="carrier" nullable="true" length="60" comment="Carrier"/>
+        <column xsi:type="varchar" name="product" nullable="true" length="60" comment="Carrier product (method)"/>
+        <column xsi:type="varchar" name="service" nullable="true" length="60" comment="Carrier service"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Label Creation Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="post_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="COOLRUNNER_SHIPPING_LABELS_ORDER_ID_SALES_ORDER_ENTITY_ID" table="coolrunner_shipping_labels"
+                    column="order_id" referenceTable="sales_order" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <index referenceId="COOLRUNNER_SHIPPING_LABELS_ORDER_INCREMENT_ID" indexType="btree">
+            <column name="order_increment_id"/>
+        </index>
+        <index referenceId="COOLRUNNER_SHIPPING_LABELS_PACKAGE_NUMBER" indexType="btree">
+            <column name="package_number"/>
+        </index>
+    </table>
+
+    <table name="sales_order_address" resource="sales" engine="innodb">
+        <column xsi:type="int" name="shipping_coolrunner_pickup_id" padding="10" unsigned="true" nullable="true" comment="CoolRunner Shipping ParcelShop ID"/>
+    </table>
+
+    <table name="quote_address" resource="sales" engine="innodb">
+        <column xsi:type="int" name="shipping_coolrunner_pickup_id" padding="10" unsigned="true" nullable="true" comment="CoolRunner Shipping ParcelShop ID"/>
+    </table>
+
+    <table name="salesrule" resource="default" engine="innodb" comment="Salesrule">
+        <column xsi:type="varchar" name="cr_specific_shipping_method" nullable="true" length="255" comment="Free shipping methods of CollRunner"/>
+    </table>
+</schema>

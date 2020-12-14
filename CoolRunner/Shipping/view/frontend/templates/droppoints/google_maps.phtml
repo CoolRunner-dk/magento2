@@ -1,0 +1,27 @@
+<?php
+/**
+ *  google_maps
+ *
+ * @copyright Copyright © 2020 HeadWayIt https://headwayit.com/ All rights reserved.
+ * @author  Ilya Kushnir  ilya.kush@gmail.com
+ * Date:    11.08.2020
+ * Time:    11:46
+ */
+/**
+ * @var \CoolRunner\Shipping\Block\GoogleMaps      $block
+ * @var \Magento\Framework\View\TemplateEngine\Php $this
+ */
+?>
+<script type="text/javascript">
+    require.config({
+        paths: {
+            'googlemaps': 'https://maps.googleapis.com/maps/api/js?key=' + '<?= $block->getGoogleMapsKey() ?>'
+        }
+    })
+</script>
+<script type="text/javascript">
+    window.coolrunnerMapActivated = <?= $block->isMapActivated(); ?>;
+    <?php if ($block->isMapActivated()): ?>
+        window.carriersIcon = <?= ($block->getCarriersIcon()); ?>;
+    <?php endif; ?>
+</script>

@@ -1,13 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * coolrunner_shipping_labels_listing
+ *
+ * @copyright Copyright © 2020 HeadWayIt https://headwayit.com/ All rights reserved.
+ * @author  Ilya Kushnir  ilya.kush@gmail.com
+ */
+-->
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
             <item name="provider" xsi:type="string">coolrunner_shipping_labels_listing.coolrunner_shipping_labels_listing_data_source</item>
             <item name="deps" xsi:type="string">coolrunner_shipping_labels_listing.coolrunner_shipping_labels_listing_data_source</item>
         </item>
-        <item name="spinner" xsi:type="string">spinner_columns</item>
-
+        <item name="spinner" xsi:type="string">coolrunner_shipping_labels_columns</item>
     </argument>
-    <dataSource name="nameOfDataSource">
+    <dataSource name="coolrunner_shipping_labels_listing_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
             <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
             <argument name="name" xsi:type="string">coolrunner_shipping_labels_listing_data_source</argument>
@@ -24,7 +32,70 @@
             </argument>
         </argument>
     </dataSource>
-    <columns name="spinner_columns">
+    <container name="listing_top">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="template" xsi:type="string">ui/grid/toolbar</item>
+            </item>
+        </argument>
+        <bookmark name="bookmarks">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="namespace" xsi:type="string">coolrunner_shipping_labels_listing</item>
+                    </item>
+                </item>
+            </argument>
+        </bookmark>
+        <component name="columns_controls">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="columnsData" xsi:type="array">
+                        <item name="provider" xsi:type="string">coolrunner_shipping_labels_listing.coolrunner_shipping_labels_listing.coolrunner_shipping_labels_columns</item>
+                    </item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/controls/columns</item>
+                    <item name="displayArea" xsi:type="string">dataGridActions</item>
+                </item>
+            </argument>
+        </component>
+        <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="columnsProvider" xsi:type="string">coolrunner_shipping_labels_listing.coolrunner_shipping_labels_listing.coolrunner_shipping_labels_columns</item>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="provider" xsi:type="string">coolrunner_shipping_labels_listing.coolrunner_shipping_labels_listing.listing_top.bookmarks</item>
+                        <item name="namespace" xsi:type="string">current.filters</item>
+                    </item>
+                    <item name="templates" xsi:type="array">
+                        <item name="filters" xsi:type="array">
+                            <item name="select" xsi:type="array">
+                                <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>
+                                <item name="template" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                            </item>
+                        </item>
+                    </item>
+                    <item name="childDefaults" xsi:type="array">
+                        <item name="provider" xsi:type="string">coolrunner_shipping_labels_listing.coolrunner_shipping_labels_listing.listing_top.listing_filters</item>
+                        <item name="imports" xsi:type="array">
+                            <item name="visible" xsi:type="string">coolrunner_shipping_labels_listing.coolrunner_shipping_labels_listing.coolrunner_shipping_labels_columns.${ $.index }:visible</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </filters>
+        <paging name="listing_paging">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="provider" xsi:type="string">coolrunner_shipping_labels_listing.coolrunner_shipping_labels_listing.listing_top.bookmarks</item>
+                        <item name="namespace" xsi:type="string">current.paging</item>
+                    </item>
+                    <item name="selectProvider" xsi:type="string">coolrunner_shipping_labels_listing.coolrunner_shipping_labels_listing.coolrunner_shipping_labels_columns.ids</item>
+                </item>
+            </argument>
+        </paging>
+    </container>
+    <columns name="coolrunner_shipping_labels_columns">
         <selectionsColumn name="ids">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -43,69 +114,71 @@
                 </item>
             </argument>
         </column>
-        <column name="ordernumber">
+        <column name="order_increment_id" class="CoolRunner\Shipping\Ui\Component\Listing\Column\IncrementId">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">textRange</item>
+                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
+                    <item name="filter" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Ordrenummer</item>
                 </item>
             </argument>
         </column>
-        <column name="package_number">
+        <column name="package_number" class="CoolRunner\Shipping\Ui\Component\Listing\Column\Tracking">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
+                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
                     <item name="filter" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Pakkenummer</item>
                 </item>
             </argument>
         </column>
-        <column name="carrier">
+        <column name="price_incl_tax" class="CoolRunner\Shipping\Ui\Component\Listing\Column\Price">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">Carrier</item>
+                    <item name="filter" xsi:type="string">textRange</item>
+                    <item name="label" xsi:type="string" translate="true">Pris eksl. moms</item>
                 </item>
             </argument>
         </column>
-        <column name="product">
+        <column name="price_excl_tax" class="CoolRunner\Shipping\Ui\Component\Listing\Column\Price">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">Produkt</item>
+                    <item name="filter" xsi:type="string">textRange</item>
+                    <item name="label" xsi:type="string" translate="true">Pris eksl. moms</item>
                 </item>
             </argument>
         </column>
-        <column name="service">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">Service</item>
-                </item>
-            </argument>
+        <column name="carrier" component="Magento_Ui/js/grid/columns/select" sortOrder="6">
+            <settings>
+                <options class="CoolRunner\Shipping\Model\Rate\Source\Carrier"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Carrier</label>
+            </settings>
         </column>
-        <column name="date" class="Magento\Ui\Component\Listing\Columns\Date">
+        <column name="product" component="Magento_Ui/js/grid/columns/select" sortOrder="7">
+            <settings>
+                <options class="CoolRunner\Shipping\Model\Rate\Source\Method"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Method</label>
+            </settings>
+        </column>
+        <column name="service" component="Magento_Ui/js/grid/columns/select" sortOrder="8">
+            <settings>
+                <options class="CoolRunner\Shipping\Model\Rate\Source\Service"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Service</label>
+            </settings>
+        </column>
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">dateRange</item>
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
                     <item name="dataType" xsi:type="string">date</item>
                     <item name="label" xsi:type="string" translate="true">Oprettet</item>
-                </item>
-            </argument>
-        </column>
-        <column name="link_tracking">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">Track</item>
-                </item>
-            </argument>
-        </column>
-        <column name="link_label">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">Label</item>
                 </item>
             </argument>
         </column>

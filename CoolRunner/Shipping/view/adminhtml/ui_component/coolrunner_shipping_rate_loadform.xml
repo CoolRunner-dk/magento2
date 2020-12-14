@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ *  coolrunner_shipping_rate_loadform
+ *
+ * @copyright Copyright © 2020 HeadWayIt https://headwayit.com/ All rights reserved.
+ * @author  Ilya Kushnir  ilya.kush@gmail.com
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">coolrunner_shipping_rate_loadform.loadform_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Settings</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save" class="CoolRunner\Shipping\Block\Adminhtml\Rate\Edit\LoadForm\RunButton"/>
+            <button name="back" class="CoolRunner\Shipping\Block\Adminhtml\Rate\Edit\BackButton"/>
+        </buttons>
+        <namespace>coolrunner_shipping_rate_loadform</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>coolrunner_shipping_rate_loadform.loadform_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="loadform_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="coolrunner_shipping/rate/load"/>
+        </settings>
+        <dataProvider class="CoolRunner\Shipping\Model\Rate\LoadForm\DataProvider" name="loadform_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <settings>
+            <label/>
+        </settings>
+        <field name="country_id" formElement="select" sortOrder="1">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Country</label>
+                <dataScope>country_id</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Magento\Directory\Model\ResourceModel\Country\Collection"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="carrier_code" formElement="select" sortOrder="3">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Carrier</label>
+                <dataScope>carrier_code</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="CoolRunner\Shipping\Model\Rate\Source\Carrier"/>
+                        <caption translate="true">-- Please Select --</caption>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="method" formElement="select" sortOrder="5">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Method</label>
+                <dataScope>method</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="CoolRunner\Shipping\Model\Rate\Source\Method"/>
+                        <caption translate="true">-- Please Select or leave empty--</caption>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+    </fieldset>
+</form>

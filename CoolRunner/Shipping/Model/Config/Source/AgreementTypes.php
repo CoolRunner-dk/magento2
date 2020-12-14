@@ -1,14 +1,19 @@
 <?php
-
 namespace CoolRunner\Shipping\Model\Config\Source;
+/**
+ * Class AgreementTypes
+ *
+ * @package CoolRunner\Shipping
+ */
+class AgreementTypes implements \Magento\Framework\Data\OptionSourceInterface {
 
-class AgreementTypes
-{
-    public function toOptionArray()
-    {
+    /**
+     * @return array
+     */
+    public function toOptionArray() {
         return [
-            ['value' => 'normal', 'label' => 'Eget lager'],
-            ['value' => 'pcn', 'label' => 'PakkecenterNORD']
+            ['value' => 'normal', 'label' => __('Eget lager')],
+            ['value' => 'pcn', 'label' => __('PakkecenterNORD')]
         ];
     }
 }

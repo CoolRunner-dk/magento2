@@ -1,0 +1,33 @@
+{
+    "coolrunner_shipping_labels": {
+        "column": {
+            "post_id": true,
+            "order_id": true,
+            "order_increment_id": true,
+            "package_number": true,
+            "unique_id": true,
+            "price_incl_tax": true,
+            "price_excl_tax": true,
+            "carrier": true,
+            "product": true,
+            "service": true,
+            "created_at": true
+        },
+        "index": {
+            "COOLRUNNER_SHIPPING_LABELS_ORDER_ID_SALES_ORDER_ENTITY_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "coolrunner_products": {
+        "column": {
+            "id": true,
+            "carrier": true,
+            "products": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

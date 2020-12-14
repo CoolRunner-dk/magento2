@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ *  checkout_index_index
+ *
+ * @copyright Copyright © 2020 HeadWayIt https://headwayit.com/ All rights reserved.
+ * @author  Ilya Kushnir  ilya.kush@gmail.com
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <referenceContainer name="page.bottom.container">
+        <block class="CoolRunner\Shipping\Block\GoogleMaps" name="coolrunner.droppoints.googlemaps" template="CoolRunner_Shipping::droppoints/google_maps.phtml" />
+    </referenceContainer>
+    <referenceBlock name="checkout.root">
+        <arguments>
+            <argument name="jsLayout" xsi:type="array">
+                <item name="components" xsi:type="array">
+                    <item name="checkout" xsi:type="array">
+                        <item name="children" xsi:type="array">
+                            <item name="steps" xsi:type="array">
+                                <item name="children" xsi:type="array">
+                                    <item name="shipping-step" xsi:type="array">
+                                        <item name="children" xsi:type="array">
+                                            <item name="shippingAddress" xsi:type="array">
+                                                <item name="children" xsi:type="array">
+                                                    <item name="shippingAdditional" xsi:type="array">
+                                                        <item name="component" xsi:type="string">uiComponent</item>
+                                                        <item name="displayArea" xsi:type="string">shippingAdditional</item>
+                                                        <item name="children" xsi:type="array">
+                                                            <item name="coolrunner_carrier_form" xsi:type="array">
+                                                                <item name="component" xsi:type="string">CoolRunner_Shipping/js/view/checkout/shipping/form</item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                            <item name="step-config" xsi:type="array">
+                                                <item name="children" xsi:type="array">
+                                                    <item name="shipping-rates-validation" xsi:type="array">
+                                                        <item name="children" xsi:type="array">
+                                                            <!-- coolrunnerdao-rates-validation | coolrunnerdao is carrier code. Important!  -->
+                                                            <item name="coolrunnerdao-rates-validation" xsi:type="array">
+                                                                <item name="component" xsi:type="string">CoolRunner_Shipping/js/view/shipping-rates-validation/cr_dao</item>
+                                                            </item>
+                                                            <item name="coolrunnerbring-rates-validation" xsi:type="array">
+                                                                <item name="component" xsi:type="string">CoolRunner_Shipping/js/view/shipping-rates-validation/cr_bring</item>
+                                                            </item>
+                                                            <item name="coolrunnerpostnord-rates-validation" xsi:type="array">
+                                                                <item name="component" xsi:type="string">CoolRunner_Shipping/js/view/shipping-rates-validation/cr_postnord</item>
+                                                            </item>
+                                                            <item name="coolrunnergls-rates-validation" xsi:type="array">
+                                                                <item name="component" xsi:type="string">CoolRunner_Shipping/js/view/shipping-rates-validation/cr_gls</item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                    <item name="billing-step" xsi:type="array">
+                                        <item name="children" xsi:type="array">
+                                            <item name="payment" xsi:type="array">
+                                                <item name="children" xsi:type="array">
+                                                    <item name="additional-payment-validators" xsi:type="array">
+                                                        <item name="children" xsi:type="array">
+                                                            <!-- Declare your validation. START -->
+                                                            <item name="droppoint-validator" xsi:type="array">
+                                                                <item name="component" xsi:type="string">CoolRunner_Shipping/js/view/droppoint-validation</item>
+                                                            </item>
+                                                            <!-- Declare your validation. END -->
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </referenceBlock>
+</page>

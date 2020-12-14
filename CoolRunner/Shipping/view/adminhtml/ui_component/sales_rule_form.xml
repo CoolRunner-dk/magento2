@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ *  sales_rule_form
+ *
+ * @copyright Copyright © 2020 https://headwayit.com/ HeadWayIt. All rights reserved.
+ * @author  Ilya Kushnir  ilya.kush@gmail.com
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="actions" >
+        <field name="cr_specific_shipping_method" sortOrder="2">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">CoolRunner_Shipping/js/salesrule/form/element/shipping-methods</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">CoolRunner Freight Rates</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="source" xsi:type="string">sales_rule</item>
+                </item>
+            </argument>
+            <settings>
+                <notice translate="true">
+                     Discount Amount of 0 will trigger free shipping, while any amount will be deducted from the freight price. No negative freight rates are triggered
+                </notice>
+            </settings>
+        </field>
+    </fieldset>
+</form>
