@@ -64,6 +64,13 @@
                 <carrierimage>images/dhl.png</carrierimage>
                 <model>CoolRunner\Shipping\Model\Carrier\DHL</model>
             </coolrunnerdhl>
+            <coolrunnerdhlpaket>
+                <active>0</active>
+                <title>DHL Paket</title>
+                <max_package_weight>100000</max_package_weight>
+                <carrierimage>images/dhl.png</carrierimage>
+                <model>CoolRunner\Shipping\Model\Carrier\DHLPaket</model>
+            </coolrunnerdhlpaket>
             <coolrunnergls>
                 <active>0</active>
                 <title>GLS</title>

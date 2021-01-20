@@ -147,6 +147,17 @@
                     <label>Title</label>
                 </field>
             </group>
+            <group id="coolrunnerdhlpaket" translate="label" type="text" sortOrder="23" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>CoolRunner: DHL Paket</label>
+                <field id="active" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Choose whether the supplier should be active</comment>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                </field>
+            </group>
             <group id="coolrunnerbring" translate="label" type="text" sortOrder="24" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>CoolRunner: Bring</label>
                 <field id="active" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
