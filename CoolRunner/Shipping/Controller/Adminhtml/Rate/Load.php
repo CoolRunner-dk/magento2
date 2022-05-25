@@ -64,6 +64,9 @@ class Load extends BackendAppAction implements HttpPostActionInterface {
             $carrierCode = $data['carrier_code'];
             $methodCode  = $data['method'];
             $response = $this->_helper->getRates($countryId);
+
+            \Magento\Framework\App\ObjectManager::getInstance()->get(\Psr\Log\LoggerInterface::class)->debug(print_r($response, true));
+
             $countOfRates = 0;
             $sortOrder    = 1;
             if(isset($response[$countryId]) && isset($response[$countryId][$carrierCode])){
@@ -106,6 +109,7 @@ class Load extends BackendAppAction implements HttpPostActionInterface {
             }
         }
 
+        \Magento\Framework\App\ObjectManager::getInstance()->get(\Psr\Log\LoggerInterface::class)->debug('There are no rates.');
         $this->messageManager->addErrorMessage(__('There are no rates.'));
         return $resultRedirect->setPath('*/*/loadForm');
     }

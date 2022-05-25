@@ -166,7 +166,7 @@ class Data extends AbstractHelper {
      * @return bool
      */
     public function isShippingMethodCoolRunner($shippingMethod){
-        if(strpos($shippingMethod,self::COOLRUNNER_SERVICE_PREFIX) === 0){
+        if(strpos(strval($shippingMethod),self::COOLRUNNER_SERVICE_PREFIX) === 0){
             return true;
         }
         return false;
@@ -178,14 +178,13 @@ class Data extends AbstractHelper {
      * @return bool
      */
     public function isShippingMethodCoolRunnerDroppoint($shippingMethod){
-        if($this->isShippingMethodCoolRunner($shippingMethod)
-            && (
-            	strpos($shippingMethod,CarrierModel::METHOD_TYPE_CODE_DROPPOINT) >= 0
-	            || strpos($shippingMethod,CarrierModel::METHOD_TYPE_CODE_SERVICEPOINT) >= 0
-	        )
-        ){
+        $this->_logger->debug($shippingMethod);
+        $this->_logger->debug(CarrierModel::METHOD_TYPE_CODE_DROPPOINT);
+        if($this->isShippingMethodCoolRunner($shippingMethod) && (strpos(strval($shippingMethod),CarrierModel::METHOD_TYPE_CODE_DROPPOINT) === 0)){
+            $this->_logger->debug('this is droppoint');
             return true;
         }
+        $this->_logger->debug('this is not droppoint');
         return false;
     }
 

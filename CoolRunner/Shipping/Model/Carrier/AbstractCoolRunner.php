@@ -123,6 +123,7 @@ abstract class AbstractCoolRunner extends AbstractCarrier implements CarrierInte
      */
     public function collectRates(RateRequest $request)
     {
+        $this->_logger->debug('test collectrates CoolRunner');
         /**
          * Make sure that Shipping method is enabled
          */

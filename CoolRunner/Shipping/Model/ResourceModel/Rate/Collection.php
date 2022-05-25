@@ -141,7 +141,10 @@ class Collection extends AbstractCollection
         foreach ($conditions as $conditionName) {
             $value = abs($request->getData($conditionName));
             $rateConditions[] = "(`condition_name` = '" . $conditionName . "' AND `condition_from` <= '" . $value . "' AND `condition_to` > '" . $value . "')";
-            $rateSecondConditions[] = "(`second_condition_name` = '" . $conditionName . "' AND `second_condition_from` <= '" . $value . "' AND `second_condition_to` > '" . $value . "')";
+
+            if($conditionName == "second_condition_name" AND $value != "") {
+                $rateSecondConditions[] = "(`second_condition_name` = '" . $conditionName . "' AND `second_condition_from` <= '" . $value . "' AND `second_condition_to` > '" . $value . "')";
+            }
         }
         if (!empty($rateConditions)) {
             $this->getSelect()->where(implode(' OR ', $rateConditions));

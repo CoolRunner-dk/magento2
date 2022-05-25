@@ -86,7 +86,7 @@ define([
         },
 
         /**
-         *
+         *2
          * @param list
          */
         setDroppointList: function(list) {

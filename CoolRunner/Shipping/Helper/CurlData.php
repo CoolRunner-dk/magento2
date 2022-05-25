@@ -346,8 +346,8 @@ class CurlData extends Data
                 "cart_day" => date("l"),
                 "cart_amount" => $request->getPackageQty(),
                 "cart_weight" => $request->getPackageWeight()*1000,
-                "cart_currency" => $request->getDataByKey('base_subtotal_incl_tax'),
-                "cart_subtotal" =>  $request->getDataByKey('base_currency')[0] ?? "DKK",
+                "cart_currency" => $request->getDataByKey('base_currency')[0] ?? "DKK",
+                "cart_subtotal" =>  $request->getDataByKey('base_subtotal_incl_tax'),
                 "cart_items" => [
                     [
                         "item_name" => "",

@@ -57,7 +57,7 @@ class ConvertQuoteToOrder implements ObserverInterface {
         $order->getShippingAddress()->setShippingCoolrunnerPickupId($shippingCoolRunnerPickupId);
 
         if($this->_helper->isShippingMethodCoolRunnerDroppoint($order->getShippingMethod())){
-            $droppoint = $this->_droppointManagement->fetchDroppointById($order->getShippingMethod(true)->getCarrierCcode(),$shippingCoolRunnerPickupId);
+            $droppoint = $this->_droppointManagement->fetchDroppointById($order->getShippingMethod(true)->getCarrierCode(),$shippingCoolRunnerPickupId);
             if($droppoint->getId()>0){
                 $order->getShippingAddress()->setCompany($droppoint->getName());
                 $order->getShippingAddress()->setStreet($droppoint->getStreet());

@@ -190,42 +190,9 @@ abstract class AbstractCoolRunnerOnline extends AbstractCarrierOnline implements
         }
         $result = $this->_rateFactory->create();
 
-        $smartRates = $this->_rateCollection
-            ->addFilterForSmartcheckout($request);
-
-        $smartRates = json_decode($smartRates);
-
         $rates = $this->_rateCollection
             ->addCarrierFilter($this->_getCarrierCodeWithoutPrefix())
             ->addFilterByRequest($request);
-
-        foreach ($smartRates as $smartRate) {
-            if($this->_getCarrierCodeWithoutPrefix() != $smartRate->carrier) {
-                continue;
-            }
-
-            $shippingPrice = $smartRate->conditions[0]->price;
-
-            /** @var \Magento\Quote\Model\Quote\Address\RateResult\Method $method */
-            $method = $this->_rateMethodFactory->create();
-            /**
-             * Set carrier's method data
-             */
-            $method->setCarrier('coolrunner' . strtolower($smartRate->carrier));
-            $method->setCarrierTitle(ucfirst($smartRate->carrier));
-            /**
-             * Displayed as shipping method under Carrier
-             */
-            $method->setMethod($smartRate->carrier_product . '_' . $smartRate->carrier_service);
-            $method->setMethodTitle($smartRate->description);
-            $method->setPrice($shippingPrice);
-            $method->setCost($shippingPrice);
-
-            /** don't add rate with negative price. */
-            if ($shippingPrice >= 0) {
-                $result->append($method);
-            }
-        }
 
         /** @var RateInterface $rate */
         foreach ($rates as $rate) {

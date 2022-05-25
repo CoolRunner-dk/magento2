@@ -46,6 +46,8 @@ class LabelRepository {
      */
     protected $_droppointManagement;
 
+    protected $_logger;
+
     /**
      * LabelRepository constructor.
      *
@@ -60,6 +62,7 @@ class LabelRepository {
         LabelsCollectionFactory $collectionFactory,
         ResourceLabel $resource,
         DroppointManagementInterface $droppointManagement,
+        \Psr\Log\LoggerInterface $logger,
         CurlData $helper
     ) {
         $this->_modelFactory = $labelsFactory;
@@ -67,6 +70,7 @@ class LabelRepository {
         $this->_collectionFactory = $collectionFactory;
         $this->_helper = $helper;
         $this->_droppointManagement = $droppointManagement;
+        $this->_logger = $logger;
     }
 
     /**
@@ -155,9 +159,11 @@ class LabelRepository {
         unset($shipmentData['order_id'],$shipmentData['order_increment_id']);
         $responseData = $this->_helper->generatePcnShipment($shipmentData);
 
+        // \Magento\Framework\App\ObjectManager::getInstance()->get(\Psr\Log\LoggerInterface::class)->debug(print_r($responseData, true));
+
         /** @var Labels $_labelModel */
         $_labelModel = $this->getModelObject();
-        if (isset($responseData['shipment_id'])) {
+        if (isset($responseData['shipment_id']) OR isset($responseData['package_number'])) {
             try {
 
                 $_labelModel->setOrderId($orderId)
@@ -274,8 +280,9 @@ class LabelRepository {
         }elseif ($type == 'pcn'){
 
             $orderLines = [];
-            foreach ($request->getPackageItems() as $_itemId => $_item) {
-                $orderLines[] = ['item_number' => $orderShipment->getItemById($_itemId)->getSku(), 'qty' => number_format($_item['qty'], 0)];
+
+            foreach ($orderShipment->getItemsCollection() as $item) {
+                $orderLines[] = ['item_number' => $item->getSku(), 'qty' => number_format($item->getQty(), 0)];
             }
 
             $shipmentData = [

@@ -85,8 +85,9 @@ class DroppointManagement implements DroppointManagementInterface{
      * @return DroppointInterface|void
      */
     public function fetchDroppointById($carrier, $droppointId) {
+
         $carrier     = str_replace(CurlData:: COOLRUNNER_SERVICE_PREFIX,'',$carrier);
-        $droppointId = trim($droppointId);
+        $droppointId = trim(strval($droppointId));
 
         /** @var array $response */
         $response = $this->_helper->findDroppointById($carrier,$droppointId);
